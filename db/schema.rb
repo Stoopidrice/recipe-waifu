@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_21_104109) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_21_121027) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -42,18 +42,77 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_21_104109) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "allergies", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "name"
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
+  create_table "conditions", force: :cascade do |t|
+    t.bigint "allergy_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["allergy_id"], name: "index_conditions_on_allergy_id"
+    t.index ["user_id"], name: "index_conditions_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "chat_id", null: false
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.string "role"
+    t.datetime "updated_at", null: false
+    t.index ["chat_id"], name: "index_messages_on_chat_id"
+  end
+
+  create_table "recipes", force: :cascade do |t|
+    t.integer "calories"
+    t.integer "cook_time"
+    t.datetime "created_at", null: false
+    t.text "description"
+    t.integer "difficulty"
+    t.text "ingredients"
+    t.text "instructions"
+    t.integer "prep_time"
+    t.integer "rating"
+    t.integer "servings"
+    t.text "system_prompt"
+    t.string "title"
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["user_id"], name: "index_recipes_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.datetime "created_at", null: false
+    t.text "dislikes"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
+    t.text "preferences"
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.string "unit_preference"
     t.datetime "updated_at", null: false
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "users"
+  add_foreign_key "conditions", "allergies"
+  add_foreign_key "conditions", "users"
+  add_foreign_key "messages", "chats"
+  add_foreign_key "recipes", "users"
 end
