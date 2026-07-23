@@ -49,6 +49,7 @@ gem "sassc-rails"
 gem "devise"
 gem "cloudinary"
 gem "ruby_llm", "~> 1.2.0"
+gem 'faraday'
 
 group :development, :test do
   gem "dotenv-rails"
