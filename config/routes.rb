@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
+  # generates URL routes, controller mappings for user authentication
   devise_for :users
+
+  # defines the homepage
   root to: "pages#home"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -12,5 +15,20 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  # generates the stadard RESTful routes for a Users controller.
+  resources :users do
+    # this route belongs to one specific user.
+    member do
+      # update the current user's dietary profile.
+      post :add_allergy # POST /users/:id/add_allergy
+      delete :remove_allergy # DELETE /users/:id/remove_allergy
+
+      post :add_preference # POST /users/:id/add_preference
+      delete :remove_preference # DELETE /users/:id/remove_preference
+
+      post :add_dislike # POST /users/:id/add_dislike
+      delete :remove_dislike # DELETE /users/:id/remove_dislike
+    end
+  end
+
 end
