@@ -5,6 +5,7 @@
 <% else %>
   <h3><%= link_to "Sign in", new_user_session_path %></h3>
 <% end %>
+<%# I have the above set up for now. Will likely be replaced by a proper nav-bar. %>
 
 <div class="centering">
   <div class="recipe-container">
@@ -31,7 +32,7 @@
     <div class="recipe-container">
       <p><i class="fa-solid fa-utensils"></i>Your Recipes!</p>
       <div class="d-flex justify-content-center">
-        <% if current_user.recipes != nil %>
+        <% if current_user.recipes != [] %>
           <% current_user.recipes.each do |recipe| %>
             <%= link_to recipe_path(recipe) do %>
               <div class="recipe-card">
@@ -44,6 +45,13 @@
               </div>
             <% end %>
           <% end %>
+        <% else %>
+        <div class="recipe-card">
+          <i class="fa-solid fa-utensils"></i>
+          <p>Nothing here yet!</p>
+          <%# Can add a link to the ai recipe creator here %>
+          <i class="fa-solid fa-utensils"></i>
+        </div>
         <% end %>
       </div>
     </div>

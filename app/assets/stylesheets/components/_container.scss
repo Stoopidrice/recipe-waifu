@@ -20,3 +20,16 @@
     text-decoration: none;
   }
 }
+
+.authentication-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
+  height: 600px;
+  padding: 2rem;
+  margin-top: 2rem;
+  border-radius: 50px;
+  border: 5px dotted $toasty;
+  background-color: $warm-bread;
+}
