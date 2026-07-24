@@ -1,17 +1,31 @@
-<h1><%=@chat.title %></h1>
+<h1><%= @chat.title %></h1>
 <% if @chat.messages.any? %>
   <% @chat.messages.each do |message| %>
-    <p>
-      <strong> <%= message.role %></strong>
-      <%= message.content %>
-    </p>
+    <% if message.role == "user" %>
+      <div class="d-flex justify-content-end mb-2">
+        <strong class="me-2">You</strong>
+        <div class="bg-white px-3 pt-3 pb-0 rounded-pill">
+          <%= message.content %>
+        </div>
+      </div>
+    <% elsif message.role == "assistant" %>
+      <div class="d-flex justify-content-start mb-5">
+        <strong class="me-2">Umami-chan</strong>
+        <div class="px-3 pt-3 pb-0">
+          <%= message.content %>
+        </div>
+      </div>
+    <% end %>
   <% end %>
 <% else %>
   <p>No chat history. Hurry up and say something!</p>
 <% end %>
-<div id ="new_msg_container">
+<div id="new_msg_container">
   <%= simple_form_for [@chat, @message] do |f| %>
-    <%=  f.input :content, label: "Ask a question", required: true, placeholder: "Hi" %>
+    <%= f.input :content,
+      label: " ",
+      required: true,
+      placeholder: "Ask Umami-chan something..." %>
     <%= f.button :submit, "Send", class: "btn btn-primary" %>
   <% end %>
 </div>
