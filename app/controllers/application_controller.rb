@@ -6,4 +6,10 @@ class ApplicationController < ActionController::Base
   stale_when_importmap_changes
 
   before_action :authenticate_user!
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[dislikes preferences])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[dislikes preferences])
+  end
 end
