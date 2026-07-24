@@ -1,1 +1,17 @@
-<h1><%="hi" %></h1>
+<h1><%=@chat.title %></h1>
+<% if @chat.messages.any? %>
+  <% @chat.messages.each do |message| %>
+    <p>
+      <strong> <%= message.role %></strong>
+      <%= message.content %>
+    </p>
+  <% end %>
+<% else %>
+  <p>No chat history. Hurry up and say something!</p>
+<% end %>
+<div id ="new_msg_container">
+  <%= simple_form_for [@chat, @message] do |f| %>
+    <%=  f.input :content, label: "Ask a question", required: true, placeholder: "Hi" %>
+    <%= f.button :submit, "Send", class: "btn btn-primary" %>
+  <% end %>
+</div>
