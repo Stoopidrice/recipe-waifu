@@ -1,15 +1,73 @@
-<h1><%= @recipe.title %></h1>
-<h2><%= @recipe.description %></h2>
-<h3>Difficulty: <%=@recipe.difficulty %></h3>
-<h3>Taste: <%=@recipe.rating %></h3>
-<h3>Servings: <%=@recipe.servings %></h3>
-<h3>Calories: <%=@recipe.calories %> kcal</h3>
-<h3>Prep time: <%=@recipe.prep_time %> minutes</h3>
-<h3>Cooking time: <%=@recipe.cook_time %> minutes</h3>
-<p><%=@recipe.instructions %></p>
+<div class="banner py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= asset_path(@banner) %>'); min-height: 450px; background-size: cover; background-position: center;">
+  <div class="container d-flex flex-column align-items-center justify-content-center h-100 py-5 text-white text-center">
+    <h1><%= @recipe.title %></h1>
+    <h2><%= @recipe.description %></h2>
+  </div>
+</div>
+
+<div class="recipe-overview-card card-trip rounded-3 p-4 bg-light shadow-sm">
+  <div class="row w-100 g-4">
+
+    <div class="col-12 col-md-6 d-flex flex-column justify-content-center border-end-md">
+      <div class="mb-3 d-flex justify-content-between align-items-center pb-2 border-bottom">
+        <span class="text-muted fw-bold text-uppercase small">Difficulty</span>
+        <span class="badge bg-secondary fs-6"><%= @recipe.difficulty %></span>
+      </div>
+      <div class="mb-3 d-flex justify-content-between align-items-center pb-2 border-bottom">
+        <span class="text-muted fw-bold text-uppercase small">Taste Rating</span>
+        <span class="fw-bold text-warning fs-5"> <%="★" * @recipe.rating %></span>
+      </div>
+      <div class="mb-3 d-flex justify-content-between align-items-center pb-2 border-bottom">
+        <span class="text-muted fw-bold text-uppercase small">Servings</span>
+        <span class="fw-semibold text-dark fs-5"><%= @recipe.servings %> people</span>
+      </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <span class="text-muted fw-bold text-uppercase small">Calories</span>
+        <span class="fw-bold fs-5"><%= @recipe.calories %> kcal</span>
+      </div>
+    </div>
 
 
+    <div class="col-12 col-md-6 d-flex flex-column justify-content-center card-trip-infos">
+      <div class="mb-4 text-center p-3 bg-white rounded-3 border">
+        <span class="text-muted d-block text-uppercase small fw-bold mb-1">Prep Time</span>
+        <span class="display-6 fw-bold text-primary"><%= @recipe.prep_time %></span>
+        <span class="text-muted">mins</span>
+      </div>
+      <div class="text-center p-3 bg-white rounded-3 border">
+        <span class="text-muted d-block text-uppercase small fw-bold mb-1">Cooking Time</span>
+        <span class="display-6 fw-bold text-success"><%= @recipe.cook_time %></span>
+        <span class="text-muted">mins</span>
+      </div>
 
+    </div>
 
-
-<p>Find me in app/views/recipes/show.html.erb</p>
+  </div>
+</div>
+<div class="row g-4 mt-2">
+  <div class="col-12 col-md-4">
+    <div class="card border-0 rounded-3 mt-1 p-4 h-100">
+      <span class="text-muted d-block text-uppercase small fw-bold mb-1">Ingredients</span>
+        <ul>
+        <span class="d-block text-uppercase small fw-bold mb-1">
+          <% if @recipe.ingredients.present? %>
+          <% @recipe.ingredients.split(',').each do |ingredient| %>
+          <li>
+            <%= ingredient %>
+            </li>
+            <% end %>
+            <% end %>
+          </span>
+        <span class="text-muted"></span>
+        </ul>
+      </div>
+      </div>
+  <div class="col-12 col-md-8">
+  <div class="recipe-instructions-text text-secondary lh-base fs-5 d-flex flex-wrap gap-3 justify-content-center align-items-center m-4 mx-auto" style="max-width: 800px;">
+    <%= simple_format(@recipe.instructions) %>
+  </div>
+</div>
+<%= link_to "Home", root_path %>
+<div class="banner py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path("fallback.jpg") %>'); min-height: 450px; background-size: cover; background-position: center;">
+</div>
+</div>
