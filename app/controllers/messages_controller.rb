@@ -45,7 +45,7 @@ class MessagesController < ApplicationController
         )
       end
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message)
+      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
       puts response.content
 
       recipe_data = response.content
