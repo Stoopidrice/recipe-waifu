@@ -17,8 +17,11 @@
       <% @recipes.each do |recipe| %>
         <%= link_to recipe_path(recipe) do %>
           <div class="recipe-card">
-            <h4><%= recipe.title %></h4>
-            <p><%= recipe.description %></p>
+            <div class="background-blur">
+              <%= image_tag "anime-kitchen.jpg" %>
+            </div>
+            <h4 style="font-family: $headers-font;"><%= recipe.title %></h4>
+            <p style="font-family: $body-font;"><%= recipe.description %></p>
             <div class="d-flex justify-content-around">
               <p><i class="fa-solid fa-kitchen-set">---</i><%= recipe.difficulty %>/10</p>
               <p><i class="fa-solid fa-star"></i>---<%= recipe.rating %>/5</p>
@@ -39,6 +42,9 @@
           <% current_user.recipes.each do |recipe| %>
             <%= link_to recipe_path(recipe) do %>
               <div class="recipe-card">
+                <div class="background-blur">
+                  <%= image_tag "cooking-stove.jpg" %>
+                </div>
                 <h4><%= recipe.title %></h4>
                 <p><%= recipe.description %></p>
                 <div class="d-flex justify-content-around">
