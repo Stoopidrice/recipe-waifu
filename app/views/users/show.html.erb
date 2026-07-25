@@ -1,0 +1,117 @@
+<div class="account-container">
+
+  <div class="profile-card">
+    <h1>Your Account Profile</h1>
+    <p><strong>Username:</strong> <%= @user.username.presence || "No Username Set" %> </p>
+    <p><strong>Email:</strong> <%= @user.email %> </p>
+    <%= link_to "Edit Profile", edit_user_path(@user), class: "btn-edit" %>
+  </div>
+
+  <div class="dietary-requirements-settings">
+
+    <h1>Dietary Requirements Settings</h1>
+
+    <div class="allergies">
+      <!-- <p><strong>Allergies</strong></p> -->
+      <!-- <button class="btn-edit">Edit</button> -->
+
+      <%= form_with model: Allergy.new, url: add_allergy_user_path(@user), method: :post, class: "allergy-form" do |f| %>
+        <%= f.text_field :name, placeholder: "Add allergy (e.g., peanuts)", class: "allergy-input", required: true %>
+        <%= f.submit "Add", class: "add-btn" %>
+      <% end %>
+
+      <% if @user.allergies.any? %>
+        <div class="allergy-tags">
+          <% @user.allergies.each do |allergy| %>
+            <span class="allergy-tag">
+              <%= allergy.name.capitalize %>
+              <%= link_to "×", remove_allergy_user_path(@user, allergy_id: allergy.id),
+                              data: { turbo_method: :delete, turbo_confirm: "Remove this allergy?" },
+                              class: "remove-btn" %>
+            </span>
+          <% end %>
+        </div>
+      <% else %>
+        <span class="no-allergies">None</span>
+      <% end %>
+
+    </div>
+
+    <div class="preferences">
+      <!-- <p><strong>Preferences:</strong> fresh, natural and vegan.</p> -->
+      <!-- <button class="btn-edit">Edit</button> -->
+
+      <%= form_with url: add_preference_user_path(@user), method: :post, class: "preference-form" do |f| %>
+        <%= f.text_field :preference_name, placeholder: "Add a preference (e.g., high protein meal)", class: "preference-input", required: true %>
+        <%= f.submit "Add", class: "add-btn" %>
+      <% end %>
+
+      <% if @user.preferences.present? %>
+        <% current_preferences = @user.preferences.split(',').map(&:strip).reject(&:empty?) %>
+
+        <div class="preference-tags">
+          <% current_preferences.each do |preference| %>
+            <span class="preference-tag">
+              <%= preference.capitalize %>
+              <!-- Use the text string value itself as the identifier to remove -->
+              <%= link_to "×", remove_preference_user_path(@user, preference_name: preference),
+                              data: { turbo_method: :delete, turbo_confirm: "Remove this preference?" },
+                              class: "remove-btn" %>
+            </span>
+          <% end %>
+        </div>
+      <% else %>
+        <span class="no-preferences">None listed</span>
+      <% end %>
+
+    </div>
+
+    <div class="dislikes">
+
+      <%= form_with url: add_dislike_user_path(@user), method: :post, class: "dislike-form" do |f| %>
+        <%= f.text_field :dislike_name, placeholder: "Add a dislike (e.g., onions)", class: "dislike-input", required: true %>
+        <%= f.submit "Add", class: "add-btn" %>
+      <% end %>
+
+      <% if @user.dislikes.present? %>
+        <% current_dislikes = @user.dislikes.split(',').map(&:strip).reject(&:empty?) %>
+
+        <div class="dislike-tags">
+          <% current_dislikes.each do |dislike| %>
+            <span class="dislike-tag">
+              <%= dislike.capitalize %>
+              <!-- Use the text string value itself as the identifier to remove -->
+              <%= link_to "×", remove_dislike_user_path(@user, dislike_name: dislike),
+                              data: { turbo_method: :delete, turbo_confirm: "Remove this dislike?" },
+                              class: "remove-btn" %>
+            </span>
+          <% end %>
+        </div>
+      <% else %>
+        <span class="no-dislikes">None listed</span>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="user-unit-preferences">
+    <h1>Preferences</h1>
+  <div class="unit-preference-setting">
+    <strong>Measurement System:</strong>
+
+    <%= form_with model: @user, url: user_path(@user), method: :patch, local: true, class: "inline-unit-form" do |f| %>
+      <%= f.select :unit_preference,
+                  [["Metric (g, ml)", "metric"], ["Imperial (oz, lbs)", "imperial"]],
+                  { include_blank: "Select System" },
+                  { class: "unit-dropdown", onchange: "this.form.submit();" } %>
+    <% end %>
+  </div>
+  </div>
+
+  <div class="profile-actions">
+    <%= link_to "Home", root_path, class: "btn-home" %>
+
+    <%= link_to "Sign Out", destroy_user_session_path, data: { turbo_method: :delete } %>
+  </div>
+
+</div>
