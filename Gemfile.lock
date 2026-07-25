@@ -481,6 +481,7 @@ DEPENDENCIES
   debug
   devise
   dotenv-rails
+  faraday
   font-awesome-sass (~> 6.1)
   image_processing (~> 1.2)
   importmap-rails
