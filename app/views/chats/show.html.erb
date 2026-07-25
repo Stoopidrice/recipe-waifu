@@ -16,6 +16,32 @@
         <div class="px-3 pt-3 pb-0">
           <%= message.content %>
         </div>
+        <div class="three-choices card d-flex align-items-center justify-content-between">
+          <span class="fw-medium">
+            1: <%= message.recipes[0]["title"] %>
+          </span>
+          <%= button_to "Run Recipe Creation Test Choice 1",
+              test_create_recipes_path,
+              method: :post,
+              params: { message_id: message.id, recipe_index: 0 },
+              class: "btn btn-danger m-3" %>
+          <span class="fw-medium">
+            2: <%= message.recipes[1]["title"] %>
+          </span>
+            <%= button_to "Run Recipe Creation Test Choice 2",
+              test_create_recipes_path,
+              method: :post,
+              params: { message_id: message.id, recipe_index: 1 },
+              class: "btn btn-danger m-3" %>
+          <span class="fw-medium">
+            3: <%= message.recipes[2]["title"] %>
+          </span>
+            <%= button_to "Run Recipe Creation Test Choice 3",
+              test_create_recipes_path,
+              method: :post,
+              params: { message_id: message.id, recipe_index: 2 },
+              class: "btn btn-danger m-3" %>
+        </div>
       </div>
     <% end %>
   <% end %>

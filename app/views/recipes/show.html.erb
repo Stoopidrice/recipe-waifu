@@ -72,7 +72,15 @@
 <%= button_to "Add to My Recipes",
               add_recipe_user_path(current_user),
               method: :post,
-              class: "btn btn-warning m-1" %>
+              params: { recipe_id: @recipe.id },
+              class: "btn btn-primary m-1" %>
+
+
+<%= button_to "Delete this Recipe",
+              remove_recipe_user_path(current_user),
+              method: :delete,
+              params: { recipe_id: @recipe.id },
+              class: "btn btn-danger m-1" %>
 </div>
 <div class="banner py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path("fallback.jpg") %>'); min-height: 450px; background-size: cover; background-position: center;">
 </div>
