@@ -29,6 +29,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_recipe
+    @recipe = Recipe.find_by(recipe_id: params[:id])
+    current_user.recipes << @recipe
+  end
+
   def add_allergy
     # ind or create the allergy globally by name
     allergy = Allergy.find_or_create_by(name: allergy_params[:name].strip.downcase)

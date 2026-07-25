@@ -69,6 +69,10 @@
 <div class="home-btn d-flex justify-content-center">
 <%= link_to "Return to recipes", root_path, class:"btn btn-primary m-1"%>
 <%= link_to "Edit Recipe", root_path, class:"btn btn-warning m-1"%>
+<%= button_to "Add to My Recipes",
+              add_recipe_user_path(current_user),
+              method: :post,
+              class: "btn btn-warning m-1" %>
 </div>
 <div class="banner py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path("fallback.jpg") %>'); min-height: 450px; background-size: cover; background-position: center;">
 </div>

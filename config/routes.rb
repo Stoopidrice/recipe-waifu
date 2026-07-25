@@ -32,6 +32,8 @@ Rails.application.routes.draw do
 
       post :add_dislike # POST /users/:id/add_dislike
       delete :remove_dislike # DELETE /users/:id/remove_dislike
+
+      post :add_recipe
     end
   end
 
