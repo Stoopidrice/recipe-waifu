@@ -22,6 +22,23 @@
 <% else %>
   <p>No chat history. Hurry up and say something!</p>
 <% end %>
+
+<%= link_to "#", class: "text-decoration-none text-dark" do %>
+
+  <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm" style="width: 18rem;">
+    <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
+
+    <div class="card-body">
+      <h3 class="card-title">Recipe Title</h3>
+
+      <h4 class="mb-1">🍽️ Serves: 2</h4>
+      <h4 class="mb-1">⏱️ 30 mins</h4>
+      <h4 class="mb-3">Difficulty</h4>
+  </div>
+  </div>
+<% end %>
+
+
 <div id="new_msg_container">
   <%= simple_form_for [@chat, @message] do |f| %>
     <%= f.input :content,

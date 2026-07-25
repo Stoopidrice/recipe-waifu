@@ -22,6 +22,7 @@ class MessagesController < ApplicationController
     Task:
     The user will ask for recipes.
     Always provide three recipe options.
+    If the user says something irrelevant, acknowledge it briefly and then prompt them to ask for recipes without giving any recipes at this stage.
 
     Format:
     - Include links to images of the finished dish.
