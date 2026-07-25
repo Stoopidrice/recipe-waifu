@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   # generates URL routes, controller mappings for user authentication
+  get "recipes/index"
+  get "recipes/show"
+  get "recipes/new"
+  get "recipes/create"
   devise_for :users
 
   # defines the homepage
@@ -31,4 +35,9 @@ Rails.application.routes.draw do
     end
   end
 
+  # root "posts#index"
+  resources :recipes
+  resources :chats, only: [:new, :create, :show] do
+    resources :messages, only: [:create]
+  end
 end

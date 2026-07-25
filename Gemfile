@@ -41,12 +41,15 @@ gem "image_processing", "~> 1.2"
 
 gem "sprockets-rails"
 gem "bootstrap", "~> 5.3"
+gem 'popper_js'
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
 gem "sassc-rails"
 gem "devise"
 gem "cloudinary"
+gem "ruby_llm", "~> 1.2.0"
+gem 'faraday'
 
 group :development, :test do
   gem "dotenv-rails"
