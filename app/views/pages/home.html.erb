@@ -67,4 +67,9 @@
   </div>
 <% end %>
 
-<%= link_to "Ask for a recipe!", new_chat_path %>
+<div class="centering">
+  <%= link_to new_chat_path, class: "ask_recipe_button" do %>
+    <p>Ask for a recipe</p>
+    <%= image_tag "cooking-pot.png" %>
+  <% end %>
+</div>
