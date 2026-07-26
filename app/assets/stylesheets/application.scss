@@ -10,10 +10,17 @@
 // Your CSS partials
 @import "components/index";
 @import "pages/index";
-@import "pages/user"
+@import "pages/user";
 
 
 // body {
 //   background: linear-gradient(rgb(107, 78, 54), rgb(139, 118, 71));
 //   background-attachment: fixed;
 // }
+body {
+  background-image: asset-url("umami.jpg");
+  background-size: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
