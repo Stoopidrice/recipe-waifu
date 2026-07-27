@@ -12,7 +12,7 @@
 
 <div class="centering">
   <div class="recipe-container">
-    <p><i class="fa-solid fa-certificate"></i>Suggested!</p>
+    <p class="purple-underline">Suggested!</p>
     <div class="d-flex flex-wrap justify-content-center">
       <% @recipes.each do |recipe| %>
         <%= link_to recipe_path(recipe) do %>
@@ -36,7 +36,7 @@
 <% if user_signed_in? %>
   <div class="centering">
     <div class="recipe-container">
-      <p><i class="fa-solid fa-utensils"></i>Your Recipes!</p>
+      <p class="purple-underline">Your Recipes!</p>
       <div class="d-flex flex-wrap justify-content-center">
         <% if current_user.recipes != [] %>
           <% current_user.recipes.each do |recipe| %>

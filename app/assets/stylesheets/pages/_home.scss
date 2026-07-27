@@ -4,3 +4,18 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
+
+.purple-underline {
+  width: 200px;
+  height: 30px;
+  border-image-slice: 35 20 118 27;
+  border-image-width: 20px 20px 50px 20px;
+  border-image-outset: 0px 25px 50px 15px;
+  border-image-repeat: stretch stretch;
+  border-image-source: asset_url("purple-border.png");
+  translate: -5rem -1.5rem;
+  font-family: $headers-font;
+  font-size: 1.5rem;
+  color: rgb(0, 47, 255);
+  text-shadow: 1px 1px 8px rgb(235, 193, 255);
+}
