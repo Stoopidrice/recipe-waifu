@@ -13,7 +13,7 @@
 <div class="centering">
   <div class="recipe-container">
     <p><i class="fa-solid fa-certificate"></i>Suggested!</p>
-    <div class="d-flex justify-content-center">
+    <div class="d-flex flex-wrap justify-content-center">
       <% @recipes.each do |recipe| %>
         <%= link_to recipe_path(recipe) do %>
           <div class="recipe-card">
@@ -37,7 +37,7 @@
   <div class="centering">
     <div class="recipe-container">
       <p><i class="fa-solid fa-utensils"></i>Your Recipes!</p>
-      <div class="d-flex justify-content-center">
+      <div class="d-flex flex-wrap justify-content-center">
         <% if current_user.recipes != [] %>
           <% current_user.recipes.each do |recipe| %>
             <%= link_to recipe_path(recipe) do %>
