@@ -8,3 +8,23 @@
 legend ~ div.form-check:first-of-type {
   clear: left;
 }
+
+
+.cloud-input {
+  background: rgba(255, 255, 255, 0.61);
+  border-radius: 50px;
+  padding: 20px 25px;
+  border: none;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  font-size: 1.1rem;
+  min-height: 70px;
+
+  &::placeholder {
+    color: #585757;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 5px 20px rgba(255, 150, 200, 0.4);
+  }
+}

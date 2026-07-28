@@ -1,20 +1,26 @@
 <h3><%= link_to "Home", root_path %></h3>
-<h1><%= @chat.title %></h1>
+<div class="chat-title d-flex justify-content-center mb-3">
+  <h1><%= @chat.title %></h1>
+</div>
 <div class="container chat-page">
   <% if @chat.messages.any? %>
     <% @chat.messages.each do |message| %>
       <% if message.role == "user" %>
         <div class="d-flex justify-content-end mb-2">
-          <strong class="me-2">You</strong>
-          <div class="bg-white px-3 pt-3 pb-0 rounded-pill">
-            <%= message.content %>
+          <div class="user-message">
+            <strong class="me-2">You</strong>
+            <div class="px-3 pt-3 pb-0 rounded-pill">
+              <%= message.content %>
+            </div>
           </div>
         </div>
       <% elsif message.role == "assistant" %>
         <div class="d-flex justify-content-start mb-5">
-          <strong class="me-2">Umami-chan</strong>
-          <div class="assistant-bubble">
-            <%= message.content %>
+          <div class="umami-message-name">
+            <strong class="me-2">Umami-chan</strong>
+            <div class="assistant-bubble">
+              <%= message.content %>
+            </div>
           </div>
         </div>
       <% end %>
@@ -22,23 +28,30 @@
   <% else %>
     <p>No chat history. Hurry up and say something!</p>
   <% end %>
-  <%= link_to "#", class: "text-decoration-none text-dark" do %>
-    <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm" style="width: 18rem;">
-      <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
-      <div class="card-body">
-        <h3 class="card-title">Recipe Title</h3>
-        <h4 class="mb-1">🍽️ Serves: 2</h4>
-        <h4 class="mb-1">⏱️ 30 mins</h4>
-        <h4 class="mb-3">Difficulty</h4>
+  <div class="row g-4 justify-content-center">
+    <% 3.times do %>
+      <div class="col-12 col-md-6 col-lg-4">
+        <%= link_to "#", class: "text-decoration-none text-dark" do %>
+          <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
+            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
+            <div class="card-body">
+              <h3 class="card-title">Recipe Title</h3>
+              <h4 class="mb-1">🍽️ Serves: 2</h4>
+              <h4 class="mb-1">⏱️ 30 mins</h4>
+              <h4 class="mb-3">Difficulty</h4>
+            </div>
+          </div>
+        <% end %>
       </div>
-    </div>
-  <% end %>
+    <% end %>
+  </div>
   <div id="new_msg_container">
     <%= simple_form_for [@chat, @message] do |f| %>
       <%= f.input :content,
       label: " ",
       required: true,
-      placeholder: "Ask Umami-chan something..." %>
+      placeholder: "Ask Umami-chan something...",
+      input_html: { class: "cloud-input" }  %>
       <%= f.button :submit, "Send", class: "btn btn-primary" %>
     <% end %>
   </div>

@@ -11,6 +11,7 @@
 @import "components/index";
 @import "pages/index";
 @import "pages/user";
+@import "pages/chat";
 
 
 // body {
@@ -20,7 +21,7 @@
 body {
   background-image: asset-url("umami.jpg");
   background-size: 100%;
-  background-position: center;
+  background-position: center bottom;
   background-repeat: no-repeat;
   min-height: 100vh;
 }

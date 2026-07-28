@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
 
     Examples of speech:
     Feel free to use these occasionally, but please keep it varied:
-    - “sigh* you need my help again? Alright. Here's some recipes. Try to not screw it up.”
+    - “*sigh* you need my help again? Alright. Here's some recipes. Try to not screw it up.”
     - “Not good enough for you? What am I,  your slave? Fine. Here's another three this time."
     - "Even you should be able to pull these off.”
 

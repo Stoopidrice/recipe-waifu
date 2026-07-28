@@ -1,0 +1,30 @@
+.user-message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  strong {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: #000000;
+  }
+
+  .rounded-pill {
+    max-width: 400px;
+    background-color: rgba(220, 228, 115, 0.692);
+    padding: 15px 25px 20px;
+  }
+}
+
+
+.umami-message-name {
+  strong {
+    font-size: 1.2rem;
+    color:#990c52;
+  }
+}
+
+
+.assistant-bubble {
+  background-color: #ca74245b;
+}
