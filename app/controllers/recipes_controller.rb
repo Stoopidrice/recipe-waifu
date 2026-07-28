@@ -24,6 +24,7 @@ class RecipesController < ApplicationController
   end
 
   def test_create
+    @chat = Chat.find(params[:chat_id])
     message = Message.find(params[:message_id])
     num = params[:recipe_index].to_i
     hash_response = message.recipes[num]
@@ -67,7 +68,21 @@ class RecipesController < ApplicationController
     # ]
     # }
 
-    Recipe.create!(
+    # Recipe.create!(
+    #   title:        hash_response["title"],
+    #   calories:     hash_response["calories"],
+    #   cook_time:    hash_response["cook_time"],
+    #   prep_time:    hash_response["prep_time"],
+    #   servings:     hash_response["servings"],
+    #   difficulty:   hash_response["difficulty"],
+    #   ingredients:  hash_response["ingredients"],
+    #   instructions: hash_response["instructions"],
+    #   description:  hash_response["description"],
+    #   rating:       hash_response["rating"],
+    #   user_id:      current_user.id
+    # )
+
+    Recipes.create!(
       title:        hash_response["title"],
       calories:     hash_response["calories"],
       cook_time:    hash_response["cook_time"],
@@ -78,7 +93,8 @@ class RecipesController < ApplicationController
       instructions: hash_response["instructions"],
       description:  hash_response["description"],
       rating:       hash_response["rating"],
-      user_id:      current_user.id
+      user_id:      current_user.id,
+      chat_id:    @message.chat_id
     )
 
     redirect_to root_path, notice: "Test recipe created successfully!"
