@@ -47,4 +47,8 @@ end
   resources :chats, only: [:new, :create, :show] do
     resources :messages, only: [:create]
   end
+
+  # allows the user to update his own password
+  resource :password, only: [:edit, :update]
+
 end

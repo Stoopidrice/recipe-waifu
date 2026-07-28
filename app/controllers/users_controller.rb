@@ -17,8 +17,29 @@ class UsersController < ApplicationController
 
   def update
     @user = current_user
-    if @user.update(user_params)
-      # access the user's page, GET /users/:id
+    update_params = user_params
+
+    # Check if they are trying to update their password
+    is_password_updating = update_params[:password].present? || update_params[:password_confirmation].present?
+
+    if is_password_updating
+      # Force rails to validate everything. Standard .update will trigger
+      # Devise's built-in password length and confirmation matching validations!
+      successfully_updated = @user.update(update_params)
+    else
+      # Remove password keys entirely if they are blank so we can
+      # update fields like username/email without erroring.
+      update_params.delete(:password)
+      update_params.delete(:password_confirmation)
+
+      successfully_updated = @user.update(update_params)
+    end
+
+    if successfully_updated
+      # Devise automatically signs the user out after a successful password change.
+      # This signs them back in seamlessly so their session doesn't break.
+      bypass_sign_in(@user) if is_password_updating
+
       redirect_to user_path(@user), notice: "Profile updated successfully!"
     else
       if params[:action_origin] == 'edit'
@@ -171,7 +192,7 @@ class UsersController < ApplicationController
 
   # Security checkpoint: Explicitly authorize fields allowed to be updated
   def user_params
-    params.require(:user).permit(:username, :email, :unit_preference)
+    params.require(:user).permit(:username, :email, :unit_preference, :password, :password_confirmation)
   end
 
   def allergy_params
