@@ -29,6 +29,29 @@ class UsersController < ApplicationController
     end
   end
 
+  def add_recipe
+    recipe_id = params[:recipe_id]
+    @recipe = Recipe.find(recipe_id)
+
+    if current_user.recipes.include?(@recipe)
+      redirect_back fallback_location: root_path, alert: "You have already added this recipe."
+    else
+      # inserting a many-to-many relationship.
+      current_user.recipes << @recipe
+      redirect_back fallback_location: root_path, notice: "Recipe added successfully."
+    end
+  end
+
+  def remove_recipe
+    @recipe = current_user.recipes.find(params[:recipe_id])
+
+    @recipe.destroy
+
+    redirect_to root_path, notice: "Recipe deleted!"
+
+  end
+
+
   def add_allergy
     # ind or create the allergy globally by name
     allergy = Allergy.find_or_create_by(name: allergy_params[:name].strip.downcase)

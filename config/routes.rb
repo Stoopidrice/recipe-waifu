@@ -32,11 +32,18 @@ Rails.application.routes.draw do
 
       post :add_dislike # POST /users/:id/add_dislike
       delete :remove_dislike # DELETE /users/:id/remove_dislike
+
+      post :add_recipe
+      delete :remove_recipe
     end
   end
 
   # root "posts#index"
-  resources :recipes
+resources :recipes do
+  collection do
+    post :test_create
+  end
+end
   resources :chats, only: [:new, :create, :show] do
     resources :messages, only: [:create]
   end
