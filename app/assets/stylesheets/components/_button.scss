@@ -1,0 +1,37 @@
+.ask_recipe_button {
+  position: relative;
+  text-decoration: none;
+  transition: 0.2s ease;
+
+  p {
+    position: absolute;
+    inset: 80px 0 10px 0;
+    text-align: center;
+    background-color: rgba(255, 216, 169, 0.6);
+    height: 40px;
+    border-radius: 20px;
+    color: rgb(243, 53, 180);
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-shadow: 1px 1px 2px rgb(76, 0, 255);
+  }
+
+  img {
+    width: 300px;
+    z-index: -1;
+    background-color: rgba(231, 191, 139, 0.5);
+    border-radius: 100px;
+    box-shadow: 4px 4px 5px black;
+    transition: 0.2s ease;
+    border: 3px ridge rgb(151, 113, 56);
+  }
+
+  &:hover {
+    transform: scale(1.05);
+    rotate: 3deg;
+
+    img {
+    box-shadow: 10px 14px 10px black;
+    }
+  }
+}
