@@ -7,6 +7,22 @@
     font-family: $playful-font;
     color: rgb(76, 79, 253);
   }
+
+  .dropdown-menu {
+    background-color: rgb(76, 79, 253);
+    border-radius: 20px;
+    font-family: $playful-font;
+    transition: 0.3s ease;
+
+    .dropdown-item {
+      color: rgb(159, 211, 245);
+    }
+
+    .dropdown-item:hover {
+      background-color: rgb(143, 58, 255);
+      border-radius: 20px;
+    }
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
