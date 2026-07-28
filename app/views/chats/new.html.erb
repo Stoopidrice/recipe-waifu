@@ -1,8 +1,15 @@
 <h3><%= link_to "Home", root_path %></h3>
+
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <%= simple_form_for @chat do |f| %>
+      <%= simple_form_for @chat do |f| %>
       <%= f.button :submit, "New Chat" %>
-    <% end %>
+      <% end %>
   </div>
 </div>
+
+<ul>
+<% @all_chats.each do |chat|  %>
+<li><%= link_to chat.title, chat_path(chat.id) %></li>
+<% end %>
+</ul>
