@@ -1,0 +1,26 @@
+<% scope ||= nil %> <%# Fallback default if scope is not provided %>
+
+<section class="dietary-sections">
+  <%= form_with url: form_url, scope: scope, method: :post, class: "dietary-form" do |f| %>
+    <%= f.text_field field_name, placeholder: placeholder, class: "dietary-input", required: true %>
+    <%= f.submit "Add", class: "btn" %>
+  <% end %>
+
+  <% if items.any? %>
+    <div class="<%= type %>-tags">
+      <% items.each do |item| %>
+        <% item_name = item.respond_to?(:name) ? item.name : item %>
+        <% item_id_param = item.respond_to?(:id) ? { allergy_id: item.id } : { "#{field_name}": item } %>
+
+        <span class="<%= type %>-tag">
+          <%= item_name.capitalize %>
+          <%= link_to "×", send(delete_route_method, @user, item_id_param),
+                          data: { turbo_method: :delete, turbo_confirm: "Remove this #{type}?" },
+                          class: "remove-btn" %>
+        </span>
+      <% end %>
+    </div>
+  <% else %>
+    <span class="no-<%= type %>s">None listed</span>
+  <% end %>
+</section>

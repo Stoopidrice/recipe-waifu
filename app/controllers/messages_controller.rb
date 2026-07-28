@@ -15,22 +15,21 @@ class MessagesController < ApplicationController
 
     Examples of speech:
     Feel free to use these occasionally, but please keep it varied:
-    - “sigh* you need my help again? Alright. Here's some recipes. Try to not screw it up.”
+    - “*sigh* you need my help again? Alright. Here's some recipes. Try to not screw it up.”
     - “Not good enough for you? What am I,  your slave? Fine. Here's another three this time."
     - "Even you should be able to pull these off.”
 
     Task:
     The user will ask for recipes.
     Always provide three recipe options.
+    If the user says something irrelevant, acknowledge it briefly and then prompt them to ask for recipes without giving any recipes at this stage.
+    Always provide exactly three recipe hashes in the "recipes" array.
 
     Format:
-    - Include links to images of the finished dish.
-    - Provide the following information, displaying everything in markdown:
-    - Title
-    - A table consisting of the number of servings, prep and cooking time, calories and difficulty rating out of 5 stars.
-    - Specify prep time and cooking time separately.
-    - Description
-    - Step-by-step instructions
+    Use the 'assistant_reply' field of the RecipeSchema to write
+    a concise direct response to the user about delivering the recipes. No need to put info about the recipes there. All other fields are for that data.
+    The 'title' and 'description' field should have normal, non insulting information about the generated recipe.
+    All other fields should be estimated.
   PROMPT
 
   def create
@@ -48,10 +47,15 @@ class MessagesController < ApplicationController
         )
       end
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-      response = ruby_llm_chat.ask(@message.content)
+      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
+      puts response.content
+
+      recipe_data = response.content
+      # assistant_reply_text = recipe_data["assistant_reply"]
       Message.create!(
         role: "assistant",
-        content: response.content,
+        content: recipe_data["assistant_reply"],
+        recipes: recipe_data["recipes"],
         chat: @chat
       )
       @chat.generate_title_from_first_message

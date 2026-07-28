@@ -10,3 +10,8 @@
 .navbar-lewagon .navbar-brand img {
   width: 40px;
 }
+
+// get rid of the tiny traingle (caret) that Bootstrap automatically creates
+.navbar-lewagon .dropdown-toggle::after {
+  display: none;
+}
