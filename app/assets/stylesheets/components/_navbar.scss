@@ -1,6 +1,12 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: linear-gradient(rgb(231, 141, 168), rgb(204, 79, 194), rgb(231, 141, 168));
+  margin-bottom: 0.5rem;
+
+  h2 {
+    font-family: $playful-font;
+    color: rgb(76, 79, 253);
+  }
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -8,7 +14,7 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 40px;
+  width: 60px;
 }
 
 // get rid of the tiny traingle (caret) that Bootstrap automatically creates
