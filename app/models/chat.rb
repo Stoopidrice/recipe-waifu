@@ -4,7 +4,10 @@ class Chat < ApplicationRecord
 
   DEFAULT_TITLE = "Untitled"
   TITLE_PROMPT = <<~PROMPT
-    Generate a short, descriptive, 3-to-6-word title that summarizes the user question for a chat conversation. Do not use quotation marks. Return only the title.
+    Generate a short, descriptive, 3-to-6-word title that summarizes the user question for a chat conversation. Do not use quotation marks.
+    Naming convention:
+    - Name of the recipe in Title Case
+    - Omit redunant words like "recipes", "recipe" and "request"
   PROMPT
 
   def generate_title_from_first_message
