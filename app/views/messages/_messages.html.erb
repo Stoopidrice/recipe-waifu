@@ -26,10 +26,11 @@
                       <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm h-100 bg-white text-start">
                         <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
                         <div class="card-body p-3">
-                          <h3 class="card-title fs-5 fw-bold mb-2 text-dark"><%= recipe["title"] %></h3>
-                          <p class="mb-1 text-secondary small">🍽️ <%= recipe["servings"] %></p>
-                          <p class="mb-1 text-secondary small">⏱️ <%= recipe["cook_time"] %></p>
-                          <p class="mb-0 text-secondary small">📊 <%= recipe["difficulty"] %></p>
+                          <h3 class="card-title"><%= recipe["title"] %></h3>
+                          <h3 class="card-desc"><%= recipe["description"] %></h3>
+                          <h4 class="mb-1">🍽️ <%= recipe["servings"] %></h4>
+                          <h4 class="mb-1">⏱️ <%= recipe["cook_time"] %></h4>
+                          <h4 class="mb-3">📊 <%= recipe["difficulty"] %></h4>
                         </div>
                       </div>
                     <% end %>
