@@ -1,10 +1,13 @@
 class ChatsController < ApplicationController
   before_action :set_chat, only: [:show]
+  DEFAULT_TITLE = "New Chat"
   def new
+    @all_chats = Chat.all
     @chat = Chat.new
   end
 
   def create
+    # @chat.title = "New Chat"
     @chat = Chat.new(title: Chat::DEFAULT_TITLE)
     @chat.user = current_user
 
