@@ -1,11 +1,8 @@
 <h3><%= link_to "Home", root_path %></h3>
-
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <%= form_with model: @chat do |f| %>
-      <%= f.label :title %>
-      <%= f.text_field :title, class: "form-control mb-3" %>
-      <%= f.submit "Create Chat", class: "btn btn-primary" %>
+    <%= simple_form_for @chat do |f| %>
+      <%= f.button :submit, "New Chat" %>
     <% end %>
   </div>
 </div>
