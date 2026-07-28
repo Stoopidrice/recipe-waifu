@@ -1,0 +1,8 @@
+   <%= simple_form_for [chat, message] do |f| %>
+  <%= f.input :content,
+      label: " ",
+      required: true,
+      placeholder: "Ask Umami-chan something...",
+      input_html: { class: "cloud-input" }  %>
+  <%= f.button :submit, "Send", class: "btn btn-primary" %>
+<% end %>
