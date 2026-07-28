@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_07_25_081044) do
+ActiveRecord::Schema[8.1].define(version: 2026_07_28_131930) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -77,6 +77,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_25_081044) do
 
   create_table "recipes", force: :cascade do |t|
     t.integer "calories"
+    t.bigint "chat_id"
     t.integer "cook_time"
     t.datetime "created_at", null: false
     t.text "description"
@@ -90,6 +91,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_25_081044) do
     t.string "title"
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.index ["chat_id"], name: "index_recipes_on_chat_id"
     t.index ["user_id"], name: "index_recipes_on_user_id"
   end
 
@@ -115,5 +117,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_07_25_081044) do
   add_foreign_key "conditions", "allergies"
   add_foreign_key "conditions", "users"
   add_foreign_key "messages", "chats"
+  add_foreign_key "recipes", "chats"
   add_foreign_key "recipes", "users"
 end

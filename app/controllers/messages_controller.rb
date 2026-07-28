@@ -28,7 +28,8 @@ class MessagesController < ApplicationController
     Format:
     Use the 'assistant_reply' field of the RecipeSchema to write
     a concise direct response to the user about delivering the recipes. No need to put info about the recipes there. All other fields are for that data.
-    The 'title' and 'description' field should have normal, non insulting information about the generated recipe.
+    The 'title' and 'description' field should have concise, normal, non insulting information about the generated recipe.
+    Be as wordy and detailed as you can in the cooking 'instructions' field with multiple paragraphs.
     All other fields should be estimated.
   PROMPT
 
