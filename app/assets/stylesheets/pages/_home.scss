@@ -13,9 +13,9 @@ body {
   border-image-outset: 0px 25px 50px 15px;
   border-image-repeat: stretch stretch;
   border-image-source: asset_url("purple-border.png");
-  translate: -5rem -1.5rem;
-  font-family: $headers-font;
-  font-size: 1.5rem;
-  color: rgb(0, 47, 255);
-  text-shadow: 1px 1px 8px rgb(235, 193, 255);
+  font-family: $fancy-font;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(131, 78, 216);
+  text-shadow: 1px 1px 6px rgb(234, 188, 255);
 }
