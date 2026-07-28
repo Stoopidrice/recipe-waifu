@@ -1,0 +1,26 @@
+  <% if @chat.messages.any? %>
+  <% messages.each do |message| %>
+    <% if message.role == "user" %>
+      <div class="d-flex justify-content-end mb-2">
+        <div class="user-message">
+          <strong class="me-2">You</strong>
+          <div class="px-3 pt-3 pb-0 rounded-pill">
+            <%= message.content %>
+          </div>
+        </div>
+      </div>
+    <% elsif message.role == "assistant" %>
+      <div class="d-flex justify-content-start mb-5">
+        <div class="umami-message-name">
+          <%= image_tag "umami-judgmental.png", class: "umami-avatar" %>
+          <strong class="me-2">Umami-chan</strong>
+          <div class="assistant-bubble">
+            <%= message.content %>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+<% else %>
+  <p>No chat history. Hurry up and say something!</p>
+<% end %>

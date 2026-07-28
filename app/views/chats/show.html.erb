@@ -3,31 +3,7 @@
   <h1><%= @chat.title %></h1>
 </div>
 <div class="container chat-page">
-  <% if @chat.messages.any? %>
-    <% @chat.messages.each do |message| %>
-      <% if message.role == "user" %>
-        <div class="d-flex justify-content-end mb-2">
-          <div class="user-message">
-            <strong class="me-2">You</strong>
-            <div class="px-3 pt-3 pb-0 rounded-pill">
-              <%= message.content %>
-            </div>
-          </div>
-        </div>
-      <% elsif message.role == "assistant" %>
-        <div class="d-flex justify-content-start mb-5">
-          <div class="umami-message-name">
-            <strong class="me-2">Umami-chan</strong>
-            <div class="assistant-bubble">
-              <%= message.content %>
-            </div>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <p>No chat history. Hurry up and say something!</p>
-  <% end %>
+  <%= render "messages/messages", messages: @chat.messages %>
   <div class="row g-4 justify-content-center">
     <% 3.times do %>
       <div class="col-12 col-md-6 col-lg-4">
@@ -46,13 +22,6 @@
     <% end %>
   </div>
   <div id="new_msg_container">
-    <%= simple_form_for [@chat, @message] do |f| %>
-      <%= f.input :content,
-      label: " ",
-      required: true,
-      placeholder: "Ask Umami-chan something...",
-      input_html: { class: "cloud-input" }  %>
-      <%= f.button :submit, "Send", class: "btn btn-primary" %>
-    <% end %>
+    <%= render "messages/form", chat: @chat, message: @message %>
   </div>
 </div>
