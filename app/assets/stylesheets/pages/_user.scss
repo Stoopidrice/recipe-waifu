@@ -1,89 +1,21 @@
+$primary-pink: rgb(248,112,134);
+
 .account-container {
-  max-width: 600px;
+  max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-}
 
-.profile-card {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.dietary-requirements-settings {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-}
-
-.allergies {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-
-  display: flex;
-  justify-content: space-between; /* Pushes text to the left, button to the right */
-  align-items: center;            /* Centers them vertically so they line up evenly */
-}
-
-.preferences {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-
-  display: flex;
-  justify-content: space-between; /* Pushes text to the left, button to the right */
-  align-items: center;            /* Centers them vertically so they line up evenly */
-}
-
-.dislikes {
-  border: 1px solid #ccc;
-  padding: 20px;
-  border-radius: 8px;
-
-  display: flex;
-  justify-content: space-between; /* Pushes text to the left, button to the right */
-  align-items: center;            /* Centers them vertically so they line up evenly */
-}
-
-
-
-
-
-
-
-
-.edit-profile-container {
-  max-width: 450px;
-  margin: 40px auto;
-  padding: 24px;
-  background-color: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 8px;
-}
-
-.form-group {
-  margin-bottom: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 16px;
 }
 
-.form-input {
-  padding: 8px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 16px;
+.card-title {
+  color: $primary-pink;
 }
 
-.form-actions {
-  display: flex;
-  justify-content: space-between; /* Pushes text to the left, button to the right */
-  align-items: center;
-}
-
-.btn-save {
-  background-color: #2563eb;
+.btn {
+  background-color: $primary-pink;
   color: white;
   border: none;
   padding: 8px 16px;
@@ -100,13 +32,65 @@
   display: inline-block;
 }
 
-.user-unit-preferences {
+// Profile
+
+.profile-card {
+  padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  position: relative;
+
+  border: 3px dashed black;
+  border-radius: 10px;
+}
+
+.edit-profile-btn {
+  position: absolute; // 2. Pulls the button out of the normal layout flow
+  top: 16px;          // 3. Distance from the top edge of the card
+  right: 16px;         // 4. Distance from the left edge of the card
+  z-index: 10;        // Ensures it sits on top of background images or elements
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// dietary requirements settings
+
+.dietary-requirements-settings {
+  padding: 20px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  border: 3px dashed black;
+  border-radius: 10px;
+}
+
+.dietary-sections {
   border: 1px solid #ccc;
   padding: 20px;
   border-radius: 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  /* justify-content: space-between; /* Pushes text to the left, button to the right */
+  /* align-items: center;            /* Centers them vertically so they line up evenly */
 }
 
-.unit-preference-setting {
+// preferences
+
+.measurement-settings {
+  padding: 20px;
+  background-color: #fff;
+
+  border: 3px dashed black;
+  border-radius: 10px;
+}
+
+.unit-setting {
   display: flex;
   justify-content: space-between; /* Pushes text to the left, button to the right */
   align-items: center;
@@ -122,6 +106,54 @@
 }
 
 .unit-dropdown:focus {
-  border-color: #2563eb;
+  border-color: $primary-pink;
   outline: none;
+}
+
+// edit
+
+.edit-profile-container {
+  max-width: 450px;
+  margin: 40px auto;
+  padding: 24px;
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.form-group {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  label, strong, b {
+    font-weight: 700; // 700 is the numerical equivalent of 'bold'
+  }
+}
+
+.form-input {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between; /* Pushes text to the left, button to the right */
+  align-items: center;
+}
+
+.dietary-form {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Pushes text to the left, button to the right */
+  align-items: center;
+
+  gap: 8px;
+}
+
+.dietary-input {
+  width: 100%;
 }

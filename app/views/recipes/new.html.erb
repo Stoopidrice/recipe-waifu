@@ -1,2 +1,86 @@
+<%
+example_response = {
+  "assistant_reply"=>"SIGH* YOU AGAIN? FINE, HERE ARE THREE HOT DOG RECIPES. TRY NOT TO MESS THEM UP, OR I MIGHT ACTUALLY LOSE MY PATIENCE.",
+    "recipes"=>[
+      {"title"=>"Classic Chicago-Style Hot Dog",
+      "description"=>"A traditional Chicago-style hot dog topped with mustard, relish, onions, tomato slices, pickles, and sport peppers in a poppy seed bun.",
+      "ingredients"=>"Beef hot dogs, poppy seed buns, yellow mustard, sweet relish, chopped onions, tomato slices, pickle spears, sport peppers, celery salt.",
+      "instructions"=>"Grill the hot dogs until cooked through. Place in buns and top with mustard, relish, onions, tomatoes, pickles, peppers, and a sprinkle of celery salt.",
+      "calories"=>350,
+      "cook_time"=>10,
+      "difficulty"=>2,
+      "prep_time"=>5,
+      "rating"=>4,
+      "servings"=>4},
+
+      {"title"=>"New York Style Hot Dog",
+      "description"=>"A simple yet flavorful hot dog with mustard and sauerkraut on a steamed bun.",
+      "ingredients"=>"Beef hot dogs, hot dog buns, yellow mustard, sauerkraut.",
+      "instructions"=>"Cook hot dogs on a grill or boil until heated through. Steam the buns. Place hot dogs in buns and top with mustard and sauerkraut.",
+      "calories"=>330,
+      "cook_time"=>10,
+      "difficulty"=>1,
+      "prep_time"=>5,
+      "rating"=>4,
+      "servings"=>4},
+
+      {"title"=>"Chili Cheese Hot Dog",
+      "description"=>"A hearty hot dog topped with chili and melted cheese, perfect for a filling snack.",
+      "ingredients"=>"Beef hot dogs, hot dog buns, chili (prepared), shredded cheddar cheese.",
+      "instructions"=>"Cook hot dogs as desired. Fill buns with hot dogs, spoon chili over, and sprinkle with cheese. Melt the cheese under a broiler if needed.",
+      "calories"=>500,
+      "cook_time"=>15,
+      "difficulty"=>2,
+      "prep_time"=>5,
+      "rating"=>4,
+      "servings"=>4}
+    ]
+}
+%>
 <h1>Recipes#new</h1>
+<h2>Example AI response</h2>
+<h3>SIGH* YOU AGAIN? FINE, HERE ARE THREE HOT DOG RECIPES. TRY NOT TO MESS THEM UP, OR I MIGHT ACTUALLY LOSE MY PATIENCE.</h3>
+<p>title: <%= example_response["recipes"][0]["title"] %></p>
+<%= button_to "Run Recipe Creation Test Choice 1",
+              test_create_recipes_path,
+              method: :post,
+              params: { recipe_index: 0 },
+              class: "btn btn-danger m-3" %>
+
+<p>title: <%= example_response["recipes"][1]["title"] %></p>
+
+<%= button_to "Run Recipe Creation Test Choice 2",
+              test_create_recipes_path,
+              method: :post,
+              params: { recipe_index: 1 },
+              class: "btn btn-danger m-3" %>
+
+<p>title: <%= example_response["recipes"][2]["title"] %></p>
+
+              <%= button_to "Run Recipe Creation Test Choice 3",
+              test_create_recipes_path,
+              method: :post,
+              params: { recipe_index: 2 },
+              class: "btn btn-danger m-3" %>
+
+
+
+
 <p>Find me in app/views/recipes/new.html.erb</p>
+<%# <%
+Recipe.create!(
+  [
+    title: example_response.recipes[0].title,
+    calories: example_response.recipes[0].calories,
+    cook_time: example_response.recipes[0].cook_time,
+    prep_time: example_response.recipes[0].prep_time,
+    servings: example_response.recipes[0].servings,
+    difficulty: example_response.recipes[0].difficulty,
+    ingredients: example_response.recipes[0].ingredients,
+    instructions: example_response.recipes[0].instructions,
+    description:  example_response.recipes[0].description,
+    rating: example_response.recipes[0].rating,
+    user_id: current_user.id
+  ]
+)
+%> %> %>
