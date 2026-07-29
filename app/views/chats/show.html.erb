@@ -18,53 +18,57 @@
             </div>
           </div>
         <% end %>
-
-<h1><%= @chat.title %></h1>
-<% if @chat.messages.any? %>
-  <% @chat.messages.each do |message| %>
-    <% if message.role == "user" %>
-      <div class="d-flex justify-content-end mb-2">
-        <strong class="me-2">You</strong>
-        <div class="bg-white px-3 pt-3 pb-0 rounded-pill">
-          <%= message.content %>
-        </div>
       </div>
-    <% elsif message.role == "assistant" %>
-      <div class="d-flex justify-content-start mb-5">
-        <strong class="me-2">Umami-chan</strong>
-        <div class="px-3 pt-3 pb-0">
-          <%= message.content %>
+    <% end %>
+  </div>
+  <h1><%= @chat.title %></h1>
+  <% if @chat.messages.any? %>
+    <% @chat.messages.each do |message| %>
+      <% if message.role == "user" %>
+        <div class="d-flex justify-content-end mb-2">
+          <strong class="me-2">You</strong>
+          <div class="bg-white px-3 pt-3 pb-0 rounded-pill">
+            <%= message.content %>
+          </div>
         </div>
-        <div class="three-choices card d-flex align-items-center justify-content-between">
-          <span class="fw-medium">
-            1: <%= message.recipes[0]["title"] %>
-          </span>
-          <%= button_to "Run Recipe Creation Test Choice 1",
+      <% elsif message.role == "assistant" %>
+        <div class="d-flex justify-content-start mb-5">
+          <strong class="me-2">Umami-chan</strong>
+          <div class="px-3 pt-3 pb-0">
+            <%= message.content %>
+          </div>
+          <div class="three-choices card d-flex align-items-center justify-content-between">
+            <span class="fw-medium">
+              1: <%= message.recipes[0]["title"] %>
+            </span>
+            <%= button_to "Run Recipe Creation Test Choice 1",
               test_create_recipes_path,
               method: :post,
               params: { message_id: message.id, recipe_index: 0 },
               class: "btn btn-danger m-3" %>
-          <span class="fw-medium">
-            2: <%= message.recipes[1]["title"] %>
-          </span>
+            <span class="fw-medium">
+              2: <%= message.recipes[1]["title"] %>
+            </span>
             <%= button_to "Run Recipe Creation Test Choice 2",
               test_create_recipes_path,
               method: :post,
               params: { message_id: message.id, recipe_index: 1 },
               class: "btn btn-danger m-3" %>
-          <span class="fw-medium">
-            3: <%= message.recipes[2]["title"] %>
-          </span>
+            <span class="fw-medium">
+              3: <%= message.recipes[2]["title"] %>
+            </span>
             <%= button_to "Run Recipe Creation Test Choice 3",
               test_create_recipes_path,
               method: :post,
               params: { message_id: message.id, recipe_index: 2 },
               class: "btn btn-danger m-3" %>
+          </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
-  </div>
-  <div id="new_msg_container">
-    <%= render "messages/form", chat: @chat, message: @message %>
-  </div>
+  <% end %>
+</div>
+<div id="new_msg_container">
+  <%= render "messages/form", chat: @chat, message: @message %>
+</div>
 </div>
