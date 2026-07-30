@@ -8,6 +8,12 @@ class RecipesController < ApplicationController
     @banner = Rails.cache.fetch("recipe_banner_#{@recipe.id}", expires_in: 1.hour) do
       RecipeApiService.fetch_recipe_banner(@recipe)
     end
+
+    if @recipe.chat_id.present?
+    @target_chat = Chat.find(@recipe.chat_id)
+    else
+    @target_chat = Chat.new(user: current_user, title: "Chat about #{@recipe.title}")
+    end
   end
 
   def new
