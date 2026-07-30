@@ -88,7 +88,6 @@ class MessagesController < ApplicationController
         chat: @chat
       )
 
-      @generated_recipes = @message.recipes
 
       @chat.generate_title_from_first_message
       redirect_to @chat
