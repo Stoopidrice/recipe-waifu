@@ -51,6 +51,9 @@ gem "cloudinary"
 gem "ruby_llm", "~> 1.4.0"
 gem 'faraday'
 gem "ruby_llm-schema"
+gem "httplog"
+gem "pry-byebug"
+gem "pry-rails"
 
 group :development, :test do
   gem "dotenv-rails"

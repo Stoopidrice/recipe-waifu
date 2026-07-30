@@ -49,6 +49,7 @@ class MessagesController < ApplicationController
       end
 
 
+
       if params[:edit_recipe_id].present?
         @recipe_to_edit = Recipe.find_by(id: params[:edit_recipe_id])
 
@@ -75,13 +76,23 @@ class MessagesController < ApplicationController
       end
 
 
-      ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
-      puts response.content
+      # ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
+      # response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
+      # puts response.content
 
-      recipe_data = response.content
+      # recipe_data = response.content
       # assistant_reply_text = recipe_data["assistant_reply"]
-      Message.create!(
+
+            recipe_data = {
+        "assistant_reply" => "Here is a mock recipe based on your prompt: #{@message.content}.",
+        "recipes" => [
+          { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
+          { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
+          { "title" => "Mock Recipe", "instructions" => "Just a test recipe." }
+        ]
+      }
+
+      @ai_response = Message.create!(
         role: "assistant",
         content: recipe_data["assistant_reply"],
         recipes: recipe_data["recipes"],
@@ -89,8 +100,16 @@ class MessagesController < ApplicationController
       )
 
 
+
+
+
+
       @chat.generate_title_from_first_message
-      redirect_to @chat
+      respond_to do |format|
+        format.html { redirect_to @chat}
+        format.turbo_stream
+      end
+      # redirect_to @chat
     else
       render "chats/show", status: :unprocessable_entity
     end

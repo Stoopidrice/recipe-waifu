@@ -3,11 +3,14 @@
 </div>
 
 <div class="container chat-page">
-  <%= render "messages/messages", messages: @chat.messages %>
-  <div class="row g-4 justify-content-center">
-
-  <div id="new_msg_container">
-    <%= render "messages/form", chat: @chat, message: @message %>
+  <div id="messages">
+    <%= render "messages/messages", messages: @chat.messages %>
   </div>
+  <div class="row g-4 justify-content-center">
+    <div id="new_msg_container">
+      <div id="new_message_form_container">
+        <%= render "messages/form", chat: @chat, message: Message.new %>
+      </div>
+    </div>
   </div>
 </div>
