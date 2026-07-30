@@ -1,4 +1,4 @@
-<% if @chat.messages.any? %>
+  <% if @chat.messages.any? %>
   <% messages.each do |message| %>
     <% if message.role == "user" %>
       <div class="d-flex justify-content-end mb-2">
@@ -11,59 +11,41 @@
       </div>
     <% elsif message.role == "assistant" %>
       <div class="d-flex justify-content-start mb-5">
-        <div class="umami-message-name w-100">
+        <div class="umami-message-name">
           <%= image_tag "umami-judgmental.png", class: "umami-avatar" %>
           <strong class="me-2">Umami-chan</strong>
           <div class="assistant-bubble">
             <%= message.content %>
 
-            <%# Display recipes right under the text, inside the chat bubble bounds or immediately aligned beneath it %>
-            <% if message.recipes.present? %>
-              <div class="row g-3 justify-content-start mt-3">
-                <% message.recipes.compact.each do |recipe| %>
-                  <div class="col-12 col-md-6 col-lg-4">
-                    <%= link_to "#", class: "text-decoration-none text-dark" do %>
-                      <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm h-100 bg-white text-start">
-                        <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
-                        <div class="card-body p-3">
-                          <h3 class="card-title"><%= recipe["title"] %></h3>
-                          <h3 class="card-desc"><%= recipe["description"] %></h3>
-                          <h4 class="mb-1">🍽️ <%= recipe["servings"] %></h4>
-                          <h4 class="mb-1">⏱️ <%= recipe["cook_time"] %></h4>
-                          <h4 class="mb-3">📊 <%= recipe["difficulty"] %></h4>
+              <!-- Move the generated cards inside the chatbox -->
+              <!-- First, check if there are any recipes -->
+              <% if message.recipes.present? %>
+                <div class="row g-4 justify-content-center mt-1">
+                  <% 3.times do |i| %>
+                  <!-- flex will ensure that all cards will have the same heigth -->
+                  <div class="col-12 col-md-6 col-lg-4 d-flex">
+                  <%= button_to test_create_recipes_path,
+                            method: :post,
+                            params: { message_id: message.id, recipe_index: i },
+                            form: { class: "d-flex flex-grow-1" },
+                            class: "d-flex flex-grow-1 bg-transparent text-decoration-none text-dark border-0" do %>
+                        <div class="flex-grow-1 d-flex card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
+                          <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
+                          <div class="card-body">
+                            <h3 class="card-title"><%= message.recipes[i]["title"] %></h3>
+                            <h3 class="card-desc"><%= message.recipes[i]["description"] %></h3>
+                            <h4 class="mb-1">🍽️ Serves: <%= message.recipes[i]["servings"]%></h4>
+                            <h4 class="mb-1">⏱️: <%=message.recipes[i]["cook_time"] %></h4>
+                            <h4 class="mb-3">Difficulty: <%=message.recipes[i]["difficulty"] %></h4>
+                          </div>
                         </div>
-                      </div>
-                    <% end %>
-                  </div>
-                <% end %>
-              </div>
-            <% end %>
+                      <% end %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
 
           </div>
-          <div class="container chat-page">
-  <div class="row g-4 justify-content-center">
-      <div class="col-12 col-md-6 col-lg-4">
-    <% 3.times do |i| %>
-    <%= button_to test_create_recipes_path,
-              method: :post,
-              params: { message_id: message.id, recipe_index: i },
-              class: "bg-transparent text-decoration-none text-dark border-0" do %>
-          <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
-            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
-            <div class="card-body">
-              <h3 class="card-title"><%= message.recipes[i]["title"] %></h3>
-              <h3 class="card-desc"><%= message.recipes[i]["description"] %></h3>
-              <h4 class="mb-1">🍽️ Serves: <%= message.recipes[i]["servings"]%></h4>
-              <h4 class="mb-1">⏱️: <%=message.recipes[i]["cook_time"] %></h4>
-              <h4 class="mb-3">Difficulty: <%=message.recipes[i]["difficulty"] %></h4>
-            </div>
-          </div>
-        <% end %>
-      <% end %>
-      </div>
-  </div>
-</div>
-
         </div>
       </div>
     <% end %>
