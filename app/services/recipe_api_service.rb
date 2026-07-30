@@ -15,4 +15,11 @@ class RecipeApiService
     data = JSON.parse(response.body)
     data&.dig("urls", "regular") || "fallback.jpg"
   end
+
+
+  def self.fetch_card_banner(recipes, index)
+    response = Faraday.get("https://apis.scrimba.com/unsplash/photos/random?orientation=landscape&query=#{recipes["recipes"][index]["title"]}")
+    data = JSON.parse(response.body)
+    data&.dig("urls", "regular") || "fallback.jpg"
+  end
 end

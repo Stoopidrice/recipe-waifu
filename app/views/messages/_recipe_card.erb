@@ -1,5 +1,13 @@
+<% banner_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg" %>%
+
+<!--Delete this if you want the page to load faster -->
+<% banner_url = Rails.cache.fetch("recipe_banner_#{message.id}_#{i}", expires_in: 1.hour) do  %>
+  <% RecipeApiService.fetch_card_banner(message, i) %>
+<% end %>
+<!--Delete this if you want the page to load faster -->
+
 <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
-  <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
+  <%= image_tag banner_url, class: "card-img-top" %>
     <div class="card-body">
       <h3 class="card-title"><%= message.recipes[i]["title"] %></h3>
       <h3 class="card-desc"><%= message.recipes[i]["description"] %></h3>
@@ -7,10 +15,11 @@
       <h4 class="mb-1">⏱️: <%=message.recipes[i]["cook_time"] %> minutes</h4>
       <h4 class="mb-3">Difficulty: <%=message.recipes[i]["difficulty"] %></h4>
       <span>
-        <% if Recipe.exists?(title: message.recipes[i]["title"]) %>
-          <% local_recipe = Recipe.find_by(title: message.recipes[i]["title"]) %>
+        <% local_recipe = Recipe.find_by(title: message.recipes[i]["title"], description: message.recipes[i]["description"]) %>
+          <% if local_recipe %>
           <% edit_url = chat_path(@chat, edit_recipe_id: local_recipe.id) %>
           <%= link_to "Edit with AI", edit_url, class: "btn btn-warning text-dark border-0 w-100" %>
+          <%= link_to "View this Recipe", recipe_path(local_recipe), class: "btn btn-primary mt-1 text-dark border-0 w-100" %>
         <% end %>
       </span>
       <% if is_editing %>

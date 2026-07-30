@@ -81,7 +81,9 @@ class RecipesController < ApplicationController
     #   rating:       hash_response["rating"],
     #   user_id:      current_user.id
     # )
-
+    if Recipe.exists?(title: hash_response["title"], ingredients: hash_response["ingredients"], instructions: hash_response["instructions"])
+      redirect_back fallback_location: root_path, notice: "Recipe already exists!"
+    else
     @recipe = Recipe.create!(
       title:        hash_response["title"],
       calories:     hash_response["calories"],
@@ -98,6 +100,7 @@ class RecipesController < ApplicationController
     )
 
     redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
+    end
   end
 
 
