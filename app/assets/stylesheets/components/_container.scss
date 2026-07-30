@@ -1,16 +1,18 @@
 .centering {
   display: flex;
   justify-content: center;
+  height: 350px;
 }
 
 .recipe-container {
+  align-content: center;
   width: 80%;
-  max-height: 400px;
-  overflow-y: scroll;
+  height: 100%;
   padding: 5px;
   margin: 20px 0 20px 0;
-  border: 3px dashed black;
   border-radius: 10px;
+  overflow-x: hidden;
+  mask-image: linear-gradient(to right, transparent, black 10% 90%, transparent);
 
   p {
     margin: 0;
@@ -18,6 +20,23 @@
 
   a {
     text-decoration: none;
+  }
+
+  .card-group-container {
+    display: flex;
+    width: max-content;
+    will-change: transform;
+    animation: scroll 20s linear infinite;
+  }
+
+  &:hover .card-group-container {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes scroll {
+  to {
+    transform: translateX(-50%);
   }
 }
 
