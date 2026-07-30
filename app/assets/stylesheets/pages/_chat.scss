@@ -46,7 +46,7 @@
 
   .umami-avatar {
     width: 200px;
-    height: 200px;
+    height: 250px;
     object-fit: cover;
   }
 
@@ -59,4 +59,23 @@
 
 .assistant-bubble {
   background-color: #ca74245b;
+}
+
+
+.no-chats-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.no-chats-image {
+  width: 500px;
+  height: 600px;
+  object-fit: cover;
+}
+
+.no-chats-text {
+  font-size: 2rem;
 }
