@@ -74,7 +74,7 @@
 
 
 <% if @recipe.chat_id.present? %>
-  <%= link_to "Edit Recipe", chat_path(@target_chat), class: "btn btn-warning m-1" %>
+  <%= link_to "Edit Recipe", chat_path(@target_chat, edit_recipe_id: @recipe.id), class: "btn btn-warning m-1" %>
 <% else %>
   <%= button_to "Edit Recipe", chats_path(chat: { title: @target_chat.title }), method: :post, class: "btn btn-warning m-1" %>
 <% end %>
