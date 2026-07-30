@@ -1,16 +1,17 @@
 // Import Google fonts
 @import url('https://fonts.googleapis.com/css?family=Nunito:400,700|Work+Sans:400,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&family=Marck+Script&family=Playpen+Sans:wght@100..800&display=swap');
-
-// Define fonts for body and headers
-$bubbly-font: "Playpen Sans", "Helvetica", "sans-serif";
-$playful-font: "DynaPuff", "Helvetica", "sans-serif";
-$fancy-font: "Marck Script", "Helvetica", "sans-serif";
-@import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Covered+By+Your+Grace&family=Gochi+Hand&family=Shadows+Into+Light&family=Shadows+Into+Light+Two&display=swap');
+
 // Define fonts for body and headers
 $body-font: "Shadows Into Light Two", cursive;
 $headers-font: "Shadows Into Light Two", cursive;
+
+
+// Define other fonts
+$playful-font: "Playpen Sans", "Helvetica", "sans-serif";
+$bubbly-font: "DynaPuff", "Helvetica", "sans-serif";
+$fancy-font: "Marck Script", "Helvetica", "sans-serif";
 
 // To use a font file (.woff) uncomment following lines
 // @font-face {
