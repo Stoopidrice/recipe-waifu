@@ -1,4 +1,5 @@
   <% if @chat.messages.any? %>
+  <% umami_count = 0 %>
   <% messages.each do |message| %>
     <% if message.role == "user" %>
       <div class="d-flex justify-content-end mb-2">
@@ -10,37 +11,46 @@
         </div>
       </div>
     <% elsif message.role == "assistant" %>
+      <% umami_image = case umami_count
+    when 0
+      "umami-judgmental.png"
+    when 1
+      "umami-extra-angry.png"
+    else
+      "umami-overwhelmed.png"
+    end
+    %>
       <div class="d-flex justify-content-start mb-5">
         <div class="umami-message-name">
-          <%= image_tag "umami-judgmental.png", class: "umami-avatar" %>
+          <%= image_tag umami_image, class: "umami-avatar" %>
           <strong class="me-2">Umami-chan</strong>
           <div class="assistant-bubble">
             <%= message.content %>
           </div>
+          <% umami_count += 1 %>
           <div class="container chat-page">
-  <div class="row g-4 justify-content-center">
-    <% 3.times do |i| %>
-      <div class="col-12 col-md-6 col-lg-4">
-    <%= button_to test_create_recipes_path,
+            <div class="row g-4 justify-content-center">
+              <% 3.times do |i| %>
+                <div class="col-12 col-md-6 col-lg-4">
+                  <%= button_to test_create_recipes_path,
               method: :post,
               params: { message_id: message.id, recipe_index: i },
               class: "bg-transparent text-decoration-none text-dark border-0" do %>
-          <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
-            <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
-            <div class="card-body">
-              <h3 class="card-title"><%= message.recipes[i]["title"] %></h3>
-              <h3 class="card-desc"><%= message.recipes[i]["description"] %></h3>
-              <h4 class="mb-1">🍽️ Serves: <%= message.recipes[i]["servings"]%></h4>
-              <h4 class="mb-1">⏱️: <%=message.recipes[i]["cook_time"] %></h4>
-              <h4 class="mb-3">Difficulty: <%=message.recipes[i]["difficulty"] %></h4>
+                    <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
+                      <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
+                      <div class="card-body">
+                        <h3 class="card-title"><%= message.recipes[i]["title"] %></h3>
+                        <h3 class="card-desc"><%= message.recipes[i]["description"] %></h3>
+                        <h4 class="mb-1">🍽️ Serves: <%= message.recipes[i]["servings"]%></h4>
+                        <h4 class="mb-1">⏱️: <%=message.recipes[i]["cook_time"] %></h4>
+                        <h4 class="mb-3">Difficulty: <%=message.recipes[i]["difficulty"] %></h4>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
-        <% end %>
-      </div>
-      <% end %>
-  </div>
-</div>
-
         </div>
       </div>
     <% end %>
