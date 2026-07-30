@@ -1,4 +1,4 @@
-<% banner_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg" %>%
+<% banner_url = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg" %>
 
 <!--Delete this if you want the page to load faster -->
 <% banner_url = Rails.cache.fetch("recipe_banner_#{message.id}_#{i}", expires_in: 1.hour) do  %>
