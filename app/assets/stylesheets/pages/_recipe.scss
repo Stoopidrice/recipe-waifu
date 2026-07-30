@@ -1,0 +1,37 @@
+.banner {
+  mask-image: linear-gradient(to bottom, transparent, black 10% 90%, transparent);
+
+  h1 {
+    font-family: $bubbly-font !important;
+    color: $bubblegum;
+    text-shadow: 1px 1px 2px rgb(65, 1, 43);
+  }
+  h2 {
+    color: rgb(46, 34, 54);
+    text-shadow: 1px 1px 8px rgb(235, 193, 255);
+    font-weight: 600;
+  }
+
+  .container {
+    border-image-slice: 34% fill;
+    border-image-width: 5rem;
+    border-image-repeat: round;
+    border-image-source: asset_url("star-border.png");
+  }
+}
+
+.the-times {
+  position: relative;
+
+  img {
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    object-position: 0px 50%;
+    border-radius: 50px;
+    mask-image: linear-gradient(to right, black, black 0% 30%, transparent);
+  }
+}

@@ -5,36 +5,38 @@
   </div>
 </div>
 
-<div class="recipe-overview-card card-trip rounded-3 p-4 bg-light shadow-sm">
+<div class="recipe-overview-card card-trip">
   <div class="row w-100 g-4">
 
     <div class="col-12 col-md-6 d-flex flex-column justify-content-center border-end-md">
       <div class="mb-3 d-flex justify-content-between align-items-center pb-2 border-bottom">
-        <span class="text-muted fw-bold text-uppercase small">Difficulty</span>
-        <span class="badge bg-secondary fs-6"><%= @recipe.difficulty %></span>
+        <span class="text-muted fw-bold text-uppercase fs-4">Difficulty</span>
+        <span class="difficulty-number"><%= @recipe.difficulty %>/10</span>
       </div>
       <div class="mb-3 d-flex justify-content-between align-items-center pb-2 border-bottom">
-        <span class="text-muted fw-bold text-uppercase small">Taste Rating</span>
-        <span class="fw-bold text-warning fs-5"> <%="★" * @recipe.rating %></span>
+        <span class="text-muted fw-bold text-uppercase fs-4">Taste Rating</span>
+        <span class="rating-stars fw-bold text-warning fs-5"> <%= (image_tag "star.png") * @recipe.rating %></span>
       </div>
       <div class="mb-3 d-flex justify-content-between align-items-center pb-2 border-bottom">
-        <span class="text-muted fw-bold text-uppercase small">Servings</span>
-        <span class="fw-semibold text-dark fs-5"><%= @recipe.servings %> people</span>
+        <span class="text-muted fw-bold text-uppercase fs-4">Servings</span>
+        <span class="fw-semibold text-dark fs-4"><%= @recipe.servings %> people</span>
       </div>
       <div class="d-flex justify-content-between align-items-center">
-        <span class="text-muted fw-bold text-uppercase small">Calories</span>
-        <span class="fw-bold fs-5"><%= @recipe.calories %> kcal</span>
+        <span class="text-muted fw-bold text-uppercase fs-4">Calories</span>
+        <span class="fw-bold fs-4"><%= @recipe.calories %> kcal</span>
       </div>
     </div>
 
 
     <div class="col-12 col-md-6 d-flex flex-column justify-content-center card-trip-infos">
-      <div class="mb-4 text-center p-3 bg-white rounded-3 border">
+      <div class="the-times mb-4 text-center p-3 rounded-3">
+        <%= image_tag "anime-kitchen.jpg" %>
         <span class="text-muted d-block text-uppercase small fw-bold mb-1">Prep Time</span>
         <span class="display-6 fw-bold text-primary"><%= @recipe.prep_time %></span>
         <span class="text-muted">mins</span>
       </div>
-      <div class="text-center p-3 bg-white rounded-3 border">
+      <div class="the-times text-center p-3 rounded-3">
+        <%= image_tag "cooking-stove.jpg" %>
         <span class="text-muted d-block text-uppercase small fw-bold mb-1">Cooking Time</span>
         <span class="display-6 fw-bold text-success"><%= @recipe.cook_time %></span>
         <span class="text-muted">mins</span>
@@ -85,5 +87,3 @@
 <div class="banner py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path("fallback.jpg") %>'); min-height: 450px; background-size: cover; background-position: center;">
 </div>
 </div>
-
-#(@recipe.chat_id)
