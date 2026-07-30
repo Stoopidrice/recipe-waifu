@@ -19,8 +19,8 @@
           </div>
           <div class="container chat-page">
   <div class="row g-4 justify-content-center">
-      <div class="col-12 col-md-6 col-lg-4">
     <% 3.times do |i| %>
+      <div class="col-12 col-md-6 col-lg-4">
     <%= button_to test_create_recipes_path,
               method: :post,
               params: { message_id: message.id, recipe_index: i },
@@ -36,8 +36,8 @@
             </div>
           </div>
         <% end %>
-      <% end %>
       </div>
+      <% end %>
   </div>
 </div>
 
