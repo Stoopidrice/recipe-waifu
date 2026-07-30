@@ -27,6 +27,7 @@ class RecipesController < ApplicationController
     message = Message.find(params[:message_id])
     num = params[:recipe_index].to_i
     hash_response = message.recipes[num]
+    chat = message.chat_id
     # example_response = {"assistant_reply"=>"SIGH* You again? Fine, here's some chicken recipes. Try not to mess them up.", "recipes"=>[{"title"=>"Garlic Herb Roast Chicken", "description"=>"A flavorful roasted chicken seasoned with garlic and herbs.", "ingredients"=>"1 whole chicken, garlic, rosemary, thyme, olive oil, salt, pepper", "instructions"=>"Preheat oven to 375°F. Rub chicken with garlic, herbs, olive oil, salt, and pepper. Roast for 1.5 hours.", "calories"=>450, "cook_time"=>90, "difficulty"=>2, "prep_time"=>15, "rating"=>4, "servings"=>4}, {"title"=>"Spicy Chicken Stir-Fry", "description"=>"A quick and spicy stir-fry with vegetables and chicken slices.", "ingredients"=>"500g chicken breast, bell peppers, soy sauce, chili flakes, garlic, ginger, vegetable oil", "instructions"=>"Slice chicken and vegetables. Stir-fry garlic and ginger, add chicken until cooked, then add vegetables and sauces. Cook until tender.", "calories"=>350, "cook_time"=>20, "difficulty"=>1, "prep_time"=>10, "rating"=>4, "servings"=>2}, {"title"=>"Chicken Alfredo Pasta", "description"=>"Creamy Alfredo sauce with tender chicken and pasta.", "ingredients"=>"200g pasta, chicken breast, heavy cream, parmesan cheese, garlic, butter, salt, pepper", "instructions"=>"Cook pasta. Sauté chicken with garlic and butter. Add cream and cheese, combine with pasta.", "calories"=>700, "cook_time"=>30, "difficulty"=>2, "prep_time"=>10, "rating"=>3, "servings"=>2}]}
 
     # {
@@ -67,7 +68,21 @@ class RecipesController < ApplicationController
     # ]
     # }
 
-    Recipe.create!(
+    # Recipe.create!(
+    #   title:        hash_response["title"],
+    #   calories:     hash_response["calories"],
+    #   cook_time:    hash_response["cook_time"],
+    #   prep_time:    hash_response["prep_time"],
+    #   servings:     hash_response["servings"],
+    #   difficulty:   hash_response["difficulty"],
+    #   ingredients:  hash_response["ingredients"],
+    #   instructions: hash_response["instructions"],
+    #   description:  hash_response["description"],
+    #   rating:       hash_response["rating"],
+    #   user_id:      current_user.id
+    # )
+
+    @recipe = Recipe.create!(
       title:        hash_response["title"],
       calories:     hash_response["calories"],
       cook_time:    hash_response["cook_time"],
@@ -78,10 +93,11 @@ class RecipesController < ApplicationController
       instructions: hash_response["instructions"],
       description:  hash_response["description"],
       rating:       hash_response["rating"],
-      user_id:      current_user.id
+      user_id:      current_user.id,
+      chat_id:      chat
     )
 
-    redirect_to root_path, notice: "Test recipe created successfully!"
+    redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
   end
 
   private
