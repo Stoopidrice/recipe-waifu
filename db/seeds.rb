@@ -93,6 +93,22 @@ Recipe.create!(
   ]
 )
 
+Recipe.create!(
+  [
+    title: "Melted Witch",
+    calories: 63,
+    cook_time: 00,
+    prep_time: 1,
+    servings: 10,
+    difficulty: 1,
+    ingredients: "1 (32 fluid ounce) bottle lemon-lime sports drink, 1 (32 fluid ounce) bottle lemon-lime flavored carbonated beverage",
+    instructions: "In a punch bowl combine the sports drink and the lemon-lime soda. Stir gently and serve over ice.",
+    description: "It is green and spooky. You use green sports drink and lemon-lime soda to make it and then you serve it with ice cubes.",
+    rating: 4,
+    user_id: 3
+  ]
+)
+
 puts "...finished with recipes"
 
 puts "Populating database with allergies..."

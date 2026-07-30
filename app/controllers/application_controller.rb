@@ -12,4 +12,8 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: %i[dislikes preferences username])
     devise_parameter_sanitizer.permit(:account_update, keys: %i[dislikes preferences username])
   end
+
+  def after_sign_in_path_for(user)
+    root_path
+  end
 end

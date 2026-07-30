@@ -1,1 +1,21 @@
 // Specific CSS for your home-page
+body {
+  background: linear-gradient(rgb(107, 78, 54), rgb(139, 118, 71));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.purple-underline {
+  width: 200px;
+  height: 30px;
+  border-image-slice: 35 20 118 27;
+  border-image-width: 20px 20px 50px 20px;
+  border-image-outset: 0px 25px 50px 15px;
+  border-image-repeat: stretch stretch;
+  border-image-source: asset_url("purple-border.png");
+  font-family: $fancy-font;
+  font-size: 2rem;
+  font-weight: 600;
+  color: rgb(131, 78, 216);
+  text-shadow: 1px 1px 6px rgb(234, 188, 255);
+}
