@@ -76,21 +76,21 @@ class MessagesController < ApplicationController
       end
 
 
-      # ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-      # response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
-      # puts response.content
+      ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
+      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
+      puts response.content
 
-      # recipe_data = response.content
+      recipe_data = response.content
       # assistant_reply_text = recipe_data["assistant_reply"]
 
-            recipe_data = {
-        "assistant_reply" => "Here is a mock recipe based on your prompt: #{@message.content}.",
-        "recipes" => [
-          { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
-          { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
-          { "title" => "Mock Recipe", "instructions" => "Just a test recipe." }
-        ]
-      }
+      #       recipe_data = {
+      #   "assistant_reply" => "Here is a mock recipe based on your prompt: #{@message.content}.",
+      #   "recipes" => [
+      #     { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
+      #     { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
+      #     { "title" => "Mock Recipe", "instructions" => "Just a test recipe." }
+      #   ]
+      # }
 
       @ai_response = Message.create!(
         role: "assistant",
