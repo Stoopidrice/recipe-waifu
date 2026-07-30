@@ -1,8 +1,17 @@
    <%= simple_form_for [chat, message] do |f| %>
-  <%= f.input :content,
-      label: " ",
-      required: true,
-      placeholder: "Ask Umami-chan something...",
-      input_html: { class: "cloud-input" }  %>
-  <%= f.button :submit, "Send", class: "btn btn-primary" %>
+  <div class="chat-input-container row justify-content-center">
+    <div class="col-12 col-md-8">
+      <%= f.input :content,
+        label: " ",
+        required: true,
+        placeholder: "Ask Umami-chan something...",
+        input_html: { class: "cloud-input" }  %>
+    </div>
+    <div class="col-auto d-flex align-items-center">
+      <%= image_submit_tag "cooking-pot.png",
+      class: "ask_recipe_button",
+      width: 260,
+      height: 180 %>
+    </div>
+  </div>
 <% end %>
