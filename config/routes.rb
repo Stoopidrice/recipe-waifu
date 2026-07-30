@@ -43,6 +43,10 @@ resources :recipes do
   collection do
     post :test_create
   end
+
+    member do
+    patch :update_recipe
+  end
 end
   resources :chats, only: [:new, :create, :show] do
     resources :messages, only: [:create]

@@ -68,7 +68,7 @@
 </div>
 <div class="home-btn d-flex justify-content-center">
 <%= link_to "Return to recipes", root_path, class:"btn btn-primary m-1"%>
-<%= link_to "Edit Recipe", chat_path(@recipe.chat_id), class:"btn btn-warning m-1"%>
+<%= link_to "Edit Recipe",  @recipe.chat_id.present? ? chat_path(@recipe.chat_id) : new_chat_path, class:"btn btn-warning m-1"%>
 <%= button_to "Add to My Recipes",
               add_recipe_user_path(current_user),
               method: :post,

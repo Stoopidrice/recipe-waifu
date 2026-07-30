@@ -100,6 +100,34 @@ class RecipesController < ApplicationController
     redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
   end
 
+
+  def update_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+    @message = Message.find(params[:message_id])
+    updated_recipe_data = @message.recipes[params[:recipe_index].to_i]
+    chat = @message.chat_id
+
+    if @recipe.update!(
+      title:        updated_recipe_data["title"],
+      calories:     updated_recipe_data["calories"],
+      cook_time:    updated_recipe_data["cook_time"],
+      prep_time:    updated_recipe_data["prep_time"],
+      servings:     updated_recipe_data["servings"],
+      difficulty:   updated_recipe_data["difficulty"],
+      ingredients:  updated_recipe_data["ingredients"],
+      instructions: updated_recipe_data["instructions"],
+      description:  updated_recipe_data["description"],
+      rating:       updated_recipe_data["rating"],
+      user_id:      current_user.id,
+      chat_id:      chat
+
+    )
+    end
+    redirect_to recipe_path(@recipe), notice: "Recipe successfully updated by AI!"
+
+  end
+
+
   private
 
   def recipe_params

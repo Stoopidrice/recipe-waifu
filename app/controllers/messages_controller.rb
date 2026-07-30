@@ -47,6 +47,34 @@ class MessagesController < ApplicationController
           content: message.content
         )
       end
+
+
+      if params[:edit_recipe_id].present?
+        @recipe_to_edit = Recipe.find_by(id: params[:edit_recipe_id])
+
+        if @recipe_to_edit
+          editing_context = <<~TEXT
+            The user wants to modify their existing saved recipe.
+            Here is the current database snapshot data of that recipe:
+            - Title: #{@recipe_to_edit.title}
+            - instructions: #{@recipe_to_edit.instructions}
+            - calories: #{@recipe_to_edit.calories}
+            - ingredients: #{@recipe_to_edit.ingredients}
+            - Description: #{@recipe_to_edit.description}
+            - Servings: #{@recipe_to_edit.servings}
+            - prep_time: #{@recipe_to_edit.prep_time}
+            - Cook Time: #{@recipe_to_edit.cook_time}
+            - Difficulty: #{@recipe_to_edit.difficulty}
+            - rating: #{@recipe_to_edit.rating}
+
+            Update task: Tweak this specific recipe using the user's text instructions. Still output 3 distinct choice variations adhering to RecipeSchema.
+          TEXT
+
+          ruby_llm_chat.add_message(role: "system", content: editing_context)
+        end
+      end
+
+
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
       response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
       puts response.content
