@@ -40,7 +40,13 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save
-      ruby_llm_chat = RubyLLM.chat
+      ruby_llm_chat = RubyLLM.chat(
+        provider: :openrouter,
+        model: "google/gemma-4-26b-a4b-it:free",
+        assume_model_exists: true
+      )
+
+
       @chat.messages.each do |message|
         ruby_llm_chat.add_message(
           role: message.role,
@@ -77,7 +83,7 @@ class MessagesController < ApplicationController
 
 
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
+      response = ruby_llm_chat.with_schema(RecipeSchema, force: true).ask(@message.content)
       puts response.content
 
       recipe_data = response.content
