@@ -1,11 +1,11 @@
 <%= turbo_stream_from @chat %>
-
+<div data-controller="scroll" data-action="turbo:before-stream-render@document->scroll#messageAdded">
 <div id="chat_title" class="chat-title d-flex justify-content-center mb-3">
   <h1><%= @chat.title %></h1>
 </div>
 
-<div class="container chat-page">
-  <div id="messages">
+<div data-controller="scroll" class="container chat-page">
+  <div id="messages" data-scroll-target="messages">
     <%= render "messages/messages", messages: @chat.messages %>
   </div>
   <div class="row g-4 justify-content-center">
@@ -16,3 +16,19 @@
     </div>
   </div>
 </div>
+</div>
+
+
+<script>
+  {
+    const scrollToBottom = () => {
+      window.scrollTo(0, document.body.scrollHeight);
+    };
+
+    // Run when the page initially loads or changes via Turbo
+    document.addEventListener("turbo:load", scrollToBottom, { once: true });
+
+    // Run whenever Turbo Streams appends a new message block
+    document.addEventListener("turbo:render", scrollToBottom);
+  }
+</script>
