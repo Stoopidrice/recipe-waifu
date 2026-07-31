@@ -32,25 +32,29 @@
             <div class="row g-4 justify-content-center">
               <% 3.times do |i| %>
                 <div class="col-12 col-md-6 col-lg-4">
-                  <%= button_to test_create_recipes_path,
-              method: :post,
-              params: { message_id: message.id, recipe_index: i },
-              class: "bg-transparent text-decoration-none text-dark border-0" do %>
-                    <div class="card chat-recipe-card rounded-4 overflow-hidden shadow-sm">
-                      <%= image_tag "https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Good_Food_Display_-_NCI_Visuals_Online.jpg/1920px-Good_Food_Display_-_NCI_Visuals_Online.jpg", class: "card-img-top" %>
-                      <div class="card-body">
-                        <h3 class="card-title"><%= message.recipes[i]["title"] %></h3>
-                        <h3 class="card-desc"><%= message.recipes[i]["description"] %></h3>
-                        <h4 class="mb-1">🍽️ Serves: <%= message.recipes[i]["servings"]%></h4>
-                        <h4 class="mb-1">⏱️: <%=message.recipes[i]["cook_time"] %></h4>
-                        <h4 class="mb-3">Difficulty: <%=message.recipes[i]["difficulty"] %></h4>
-                      </div>
-                    </div>
-                  <% end %>
+                  <% is_editing = params[:edit_recipe_id].present? %>
+                  <% target_path = is_editing ? update_recipe_recipe_path : test_create_recipes_path %>
+                  <% the_HTTP_method  = is_editing ? :patch : :post %>
+
+                  <% button_params = { message_id: message.id, recipe_index: i } %>
+                  <% button_params[:recipe_id] = params[:edit_recipe_id] if is_editing %>
+
+                  <%= button_to target_path,
+                            method: the_HTTP_method,
+                            params: button_params,
+                            class: "bg-transparent text-decoration-none text-dark border-0 w-100" do %>
+
+                  <%= render "messages/recipe_card", message: message, i: i, is_editing: is_editing %>
+
+                    <% end %>
                 </div>
               <% end %>
             </div>
           </div>
+
+
+
+
         </div>
       </div>
     <% end %>
@@ -61,3 +65,12 @@
     <p class ="no-chats-text">No chat history. Hurry up and say something!</p>
   </div>
 <% end %>
+
+<%# edit_recipes_path(saved_recipe) %>
+              <%# <% if Recipe.exists?(title: message.recipes[i]["title"]) %>
+              <%# <% saved_recipe = Recipe.find_by(title: message.recipes[i]["title"]) %>
+                <%# <%= button_to "Edit", test_create_recipes_path, %>
+              <%# method: :get, %>
+              <%# params: { recipe_id: message.recipes[i]["id"]}, %>
+              <%# class: "btn btn-warning text-dark border-0" %>
+              <%# <% end %>

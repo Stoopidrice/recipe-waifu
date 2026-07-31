@@ -8,6 +8,12 @@ class RecipesController < ApplicationController
     @banner = Rails.cache.fetch("recipe_banner_#{@recipe.id}", expires_in: 1.hour) do
       RecipeApiService.fetch_recipe_banner(@recipe)
     end
+
+    if @recipe.chat_id.present?
+    @target_chat = Chat.find(@recipe.chat_id)
+    else
+    @target_chat = Chat.new(user: current_user, title: "Chat about #{@recipe.title}")
+    end
   end
 
   def new
@@ -81,7 +87,9 @@ class RecipesController < ApplicationController
     #   rating:       hash_response["rating"],
     #   user_id:      current_user.id
     # )
-
+    if Recipe.exists?(title: hash_response["title"], ingredients: hash_response["ingredients"], instructions: hash_response["instructions"])
+      redirect_back fallback_location: root_path, notice: "Recipe already exists!"
+    else
     @recipe = Recipe.create!(
       title:        hash_response["title"],
       calories:     hash_response["calories"],
@@ -98,7 +106,36 @@ class RecipesController < ApplicationController
     )
 
     redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
+    end
   end
+
+
+  def update_recipe
+    @recipe = Recipe.find(params[:recipe_id])
+    @message = Message.find(params[:message_id])
+    updated_recipe_data = @message.recipes[params[:recipe_index].to_i]
+    chat = @message.chat_id
+
+    if @recipe.update!(
+      title:        updated_recipe_data["title"],
+      calories:     updated_recipe_data["calories"],
+      cook_time:    updated_recipe_data["cook_time"],
+      prep_time:    updated_recipe_data["prep_time"],
+      servings:     updated_recipe_data["servings"],
+      difficulty:   updated_recipe_data["difficulty"],
+      ingredients:  updated_recipe_data["ingredients"],
+      instructions: updated_recipe_data["instructions"],
+      description:  updated_recipe_data["description"],
+      rating:       updated_recipe_data["rating"],
+      user_id:      current_user.id,
+      chat_id:      chat
+
+    )
+    end
+    redirect_to recipe_path(@recipe), notice: "Recipe successfully updated by AI!"
+
+  end
+
 
   private
 
