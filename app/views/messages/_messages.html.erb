@@ -33,7 +33,7 @@
               <% 3.times do |i| %>
                 <div class="col-12 col-md-6 col-lg-4">
                   <% is_editing = params[:edit_recipe_id].present? %>
-                  <% target_path = is_editing ? update_recipe_recipe_path : test_create_recipes_path %>
+                  <% target_path = is_editing ? update_recipe_recipe_path(id: params[:edit_recipe_id]) : test_create_recipes_path %>
                   <% the_HTTP_method  = is_editing ? :patch : :post %>
 
                   <% button_params = { message_id: message.id, recipe_index: i } %>
