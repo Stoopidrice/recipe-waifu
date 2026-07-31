@@ -1,5 +1,7 @@
+<div class="d-flex justify-content-start mt-4">
+  <%= image_tag "recommended.png", class: "recommended-your-recipes-hp" %>
+</div>
 <div class="d-flex justify-content-center">
-  <p class="purple-underline">Recommended!</p>
 </div>
 <div class="centering">
   <div class="recipe-container">
@@ -37,10 +39,11 @@
     </div>
   </div>
 </div>
-
 <% if user_signed_in? %>
+  <div class="d-flex justify-content-start mt-4">
+    <%= image_tag "your-recipes.png", class: "recommended-your-recipes-hp" %>
+  </div>
   <div class="d-flex justify-content-center mt-4">
-    <p class="purple-underline">Your Recipes!</p>
   </div>
   <div class="centering">
     <div class="recipe-container">
@@ -62,18 +65,17 @@
             <% end %>
           <% end %>
         <% else %>
-        <div class="recipe-card">
-          <i class="fa-solid fa-utensils"></i>
-          <p>Nothing here yet!</p>
-          <%# Can add a link to the ai recipe creator here %>
-          <i class="fa-solid fa-utensils"></i>
-        </div>
+          <div class="recipe-card">
+            <i class="fa-solid fa-utensils"></i>
+            <p>Nothing here yet!</p>
+            <%# Can add a link to the ai recipe creator here %>
+            <i class="fa-solid fa-utensils"></i>
+          </div>
         <% end %>
       </div>
     </div>
   </div>
 <% end %>
-
 <div class="d-flex justify-content-center my-5">
   <%= link_to new_chat_path, class: "ask_recipe_button" do %>
     <p>Ask for a recipe</p>
