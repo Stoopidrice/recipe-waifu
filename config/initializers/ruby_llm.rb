@@ -5,6 +5,9 @@ RubyLLM.configure do |config|
 end
 
 
+  # config.default_provider   = :openrouter
+  # config.default_model      = "google/gemma-4-26b-a4b-it:free"
+
 # config.openrouter_api_base = ENV['OPENROUTER_API_BASE']&.strip
 
 # config.gemini_api_key = ENV["GEMINI_API_KEY"]

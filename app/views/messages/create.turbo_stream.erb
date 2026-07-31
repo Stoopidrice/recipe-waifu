@@ -7,3 +7,8 @@
 <% end %>
 
 <%# "new_message_form_container" %>
+<%= turbo_stream.replace "chat_title" do %>
+  <div id="chat_title" class="chat-title d-flex justify-content-center mb-3">
+  <h1><%= @chat.title %></h1>
+</div>
+<% end %>
