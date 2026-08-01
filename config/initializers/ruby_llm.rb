@@ -4,7 +4,7 @@ RubyLLM.configure do |config|
   # config.openrouter_api_key = ENV['OPENROUTER_API_KEY']&.strip
 
   config.gemini_api_key = ENV["GEMINI_API_KEY"]
-  config.default_model = "gemini-flash-latest"
+  config.default_model = "gemini-3.1-flash-lite"
 end
 
 
