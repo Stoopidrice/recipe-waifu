@@ -19,11 +19,12 @@
           placeholder: "Ask Umami-chan something...",
           input_html: { class: "cloud-input", value: (message.new_record? ? "" : message.content) }  %>
       </div>
-      <div class="col-auto d-flex align-items-center">
-        <%= image_submit_tag "cooking-pot.png",
-        class: "ask_recipe_button",
-        width: 260,
-        height: 180 %>
+      <div class="col-auto d-flex align-items-center ">
+    <div class="d-flex justify-content-center my-5 ">
+  <%= button_tag type: "submit", class: "ask_recipe_button" do %>
+    <p class=>Send</p>
+    <%= image_tag "cooking-pot.png" %>
+  <% end %>
       </div>
     </div>
   <% end %>
