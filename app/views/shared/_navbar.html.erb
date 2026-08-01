@@ -4,7 +4,9 @@
     <%= link_to root_path, class: "navbar-brand" do %>
       <%= image_tag "home.png", class: "home-btn" %>
     <% end %>
-    <%= image_tag "logo.png", class: "logo"%>
+    <%= link_to root_path do %>
+      <%= image_tag "logo.png", class: "logo"%>
+    <% end %>
     <!-- Mobile Hamburger Button -->
     <button class="navbar-toggler"
             type="button"

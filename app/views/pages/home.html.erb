@@ -43,10 +43,10 @@
   <div class="d-flex justify-content-start mt-4">
     <%= image_tag "your-recipes.png", class: "recommended-your-recipes-hp" %>
   </div>
-  <div class="d-flex justify-content-center mt-4">
+  <div class="d-flex justify-content-center mt-1">
   </div>
   <div class="centering">
-    <div class="recipe-container">
+    <div class="recipe-container pt-4 mt-2">
       <div class="d-flex flex-wrap justify-content-center">
         <% if current_user.recipes != [] %>
           <% current_user.recipes.each do |recipe| %>

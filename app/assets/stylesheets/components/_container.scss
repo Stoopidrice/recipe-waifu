@@ -1,7 +1,7 @@
 .centering {
   display: flex;
   justify-content: center;
-  min-height: 350px;
+  min-height: 400px;
 }
 
 .recipe-container {
@@ -22,11 +22,12 @@
     text-decoration: none;
   }
 
+
   .card-group-container {
     display: flex;
     width: max-content;
     will-change: transform;
-    animation: scroll 20s linear infinite;
+    animation: scroll 30s linear infinite;
   }
 
   &:hover .card-group-container {
