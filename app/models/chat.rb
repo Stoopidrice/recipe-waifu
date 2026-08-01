@@ -17,8 +17,7 @@ class Chat < ApplicationRecord
     return if first_user_message.nil?
 
     response = RubyLLM.chat(
-        provider: :openrouter,
-        model: "google/gemma-4-26b-a4b-it:free",
+        provider: :gemini,
         assume_model_exists: true
       ).with_instructions(TITLE_PROMPT).ask(first_user_message.content)
     update!(title: response.content)

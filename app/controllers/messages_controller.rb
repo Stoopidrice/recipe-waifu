@@ -41,8 +41,7 @@ class MessagesController < ApplicationController
 
     if @message.save
       ruby_llm_chat = RubyLLM.chat(
-        provider: :openrouter,
-        model: "google/gemma-4-26b-a4b-it:free",
+        provider: :gemini,
         assume_model_exists: true
       )
 
