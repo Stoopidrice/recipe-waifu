@@ -1,15 +1,19 @@
+
 .navbar-lewagon {
   justify-content: space-between;
-  background: linear-gradient(rgb(231, 141, 168), rgb(204, 79, 194), rgb(231, 141, 168));
-  margin-bottom: 0.5rem;
+  background: linear-gradient(rgb(231, 141, 168), rgba(224, 93, 132, 0.822), rgba(208, 93, 212, 0.671), rgba(231, 141, 168, 0.301), rgba(228, 160, 180, 0));
+    padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
 
-  h2 {
-    font-family: $playful-font;
-    color: rgb(76, 79, 253);
-  }
+.logo {
+  width: 300px;
+  height: auto;
+  object-fit: contain;
+  overflow: hidden;
+}
 
   .dropdown-menu {
-    background-color: rgb(76, 79, 253);
+ background-color: rgb(76, 79, 253);
     border-radius: 20px;
     font-family: $playful-font;
     transition: 0.3s ease;
