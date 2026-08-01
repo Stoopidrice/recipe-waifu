@@ -13,7 +13,7 @@
   position: relative;
 
   h4 {
-    color: rgb(243, 53, 180);
+    color: $bubblegum;
     text-shadow: 1px 1px 2px rgb(65, 1, 43);
     border-image-slice: 34% fill;
     border-image-width: 2rem;
@@ -123,5 +123,32 @@
 
   100% {
     transform: translateY(0);
+  }
+}
+
+.recipe-overview-card {
+  padding: 2rem;
+  background-color: rgba(233, 203, 158, 0.5);
+  color: rgb(46, 34, 54);
+  text-shadow: 1px 1px 8px rgb(235, 193, 255);
+  font-weight: 600;
+
+  .difficulty-number {
+    text-align: center;
+    align-content: center;
+    font-size: 2rem;
+    font-weight: 600;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10px;
+    background-color: $blueberry;
+  }
+
+  .rating-stars {
+
+    img {
+      width: 2rem;
+      margin: 3px;
+    }
   }
 }
