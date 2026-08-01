@@ -21,7 +21,10 @@ class MessagesController < ApplicationController
 
     Task:
     The user will ask for recipes.
-    Always provide three recipe options.
+    Adhere to the following dietary needs:
+    - Allergies: [ALLERGIES]
+    - Dislikes: [DISLIKES]
+    - Preferences: [PREFERENCES]
     If the user says something irrelevant, acknowledge it briefly and then prompt them to ask for recipes without giving any recipes at this stage.
     Always provide exactly three recipe hashes in the "recipes" array.
 
@@ -38,6 +41,16 @@ class MessagesController < ApplicationController
     @message = Message.new(message_params)
     @message.chat = @chat
     @message.role = "user"
+
+
+    allergy_list    = current_user.allergies.pluck(:name).join(', ').presence || 'none'
+    dislike_list    = current_user.dislikes.to_s.presence || 'none'
+    preference_list = current_user.preferences.to_s.presence || 'any'
+
+    tailored_prompt = SYSTEM_PROMPT
+                        .gsub('[ALLERGIES]', allergy_list)
+                        .gsub('[DISLIKES]', dislike_list)
+                        .gsub('[PREFERENCES]', preference_list)
 
     if @message.save
       ruby_llm_chat = RubyLLM.chat(
@@ -81,7 +94,7 @@ class MessagesController < ApplicationController
       end
 
 
-      ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
+      ruby_llm_chat.with_instructions(tailored_prompt)
       response = ruby_llm_chat.with_schema(RecipeSchema, force: true).ask(@message.content)
       puts response.content
 
