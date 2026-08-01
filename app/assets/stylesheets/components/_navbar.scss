@@ -2,7 +2,7 @@
 .navbar-lewagon {
   justify-content: space-between;
   background: linear-gradient(rgb(231, 141, 168), rgba(224, 93, 132, 0.822), rgba(208, 93, 212, 0.671), rgba(231, 141, 168, 0.301), rgba(228, 160, 180, 0));
-    padding-top: 0.3rem;
+  padding-top: 0.3rem;
   padding-bottom: 0.3rem;
 
 .logo {
@@ -13,7 +13,7 @@
 }
 
   .dropdown-menu {
- background-color: $blueberry;
+    background-color: $blueberry;
     border-radius: 20px;
     font-family: $playful-font;
     transition: 0.3s ease;
@@ -25,6 +25,29 @@
     .dropdown-item:hover {
       background-color: rgb(143, 58, 255);
       border-radius: 20px;
+    }
+  }
+
+  .nav-link {
+    height: 50px;
+    width: 100px;
+    text-align: center;
+    align-content: center;
+    background-color: $blueberry;
+    border-radius: 20px;
+    border: 2px solid $bubblegum;
+    box-shadow: inset -2px -2px 5px black;
+    font-size: 1.25rem;
+    color: rgb(46, 34, 54);
+    text-shadow: 1px 1px 8px rgb(235, 193, 255);
+    font-weight: 600;
+    transition: 0.2s ease;
+
+    &:hover {
+      filter: brightness(1.5);
+      transform: scale(1.1);
+      rotate: 5deg;
+      box-shadow: inset -1px -1px 3px black;
     }
   }
 }

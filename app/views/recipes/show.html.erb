@@ -73,10 +73,6 @@
   <%= image_tag "home.png" %>
 <% end %>
 
-
-<%# <%= link_to "Edit Recipe",  @recipe.chat_id.present? ? chat_path(@recipe.chat_id) : chats_path, class:"btn btn-warning m-1 dark-poppy-text"%>
-
-
 <% if @recipe.chat_id.present? %>
   <%= link_to chat_path(@target_chat, edit_recipe_id: @recipe.id), class: "recipe-button" do %>
     <%= image_tag "edit.png" %>
@@ -87,19 +83,19 @@
   <% end %>
 <% end %>
 
-
 <%= button_to add_recipe_user_path(current_user), method: :post, params: { recipe_id: @recipe.id }, class: "recipe-button" do %>
   <%= image_tag "add.png" %>
 <% end %>
 
-
+<% if current_user.recipes[@recipe.id] %>
   <%= button_to remove_recipe_user_path(current_user),
       method: :delete,
       params: { recipe_id: @recipe.id },
       class: "recipe-button",
-      data: { turbo_confirm: "Are you sure? (Don't get the wrong idea...It's not like I'll miss it or anything!)" } do %>
+      data: { turbo_confirm: "Are you sure? (Don't get the wrong idea... It's not like I'll miss it or anything!)" } do %>
     <%= image_tag "delete.png" %>
   <% end %>
+<% end %>
 </div>
 <div class="banner py-5" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= image_path("umami-jesus.png") %>'); min-height: 450px; background-size: cover; background-position: 0px 40%;">
 </div>
