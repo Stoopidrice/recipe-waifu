@@ -129,6 +129,9 @@
 .recipe-overview-card {
   padding: 2rem;
   background-color: rgba(233, 203, 158, 0.5);
+  color: rgb(46, 34, 54);
+  text-shadow: 1px 1px 8px rgb(235, 193, 255);
+  font-weight: 600;
 
   .difficulty-number {
     text-align: center;
@@ -138,7 +141,7 @@
     width: 3rem;
     height: 3rem;
     border-radius: 10px;
-    background-color: rgb(76, 79, 253);
+    background-color: $blueberry;
   }
 
   .rating-stars {

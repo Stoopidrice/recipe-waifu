@@ -5,11 +5,11 @@
 
   h2 {
     font-family: $playful-font;
-    color: rgb(76, 79, 253);
+    color: $blueberry;
   }
 
   .dropdown-menu {
-    background-color: rgb(76, 79, 253);
+    background-color: $blueberry;
     border-radius: 20px;
     font-family: $playful-font;
     transition: 0.3s ease;
