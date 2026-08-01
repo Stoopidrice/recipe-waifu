@@ -2,11 +2,9 @@
   <div class="container-fluid">
     <!-- Logo -->
     <%= link_to root_path, class: "navbar-brand" do %>
-      <%= image_tag "Umami-Chan.png" %>
+      <%= image_tag "home.png", class: "home-btn" %>
     <% end %>
-
-    <h2>Waifood</h2>
-
+    <%= image_tag "logo.png", class: "logo"%>
     <!-- Mobile Hamburger Button -->
     <button class="navbar-toggler"
             type="button"
@@ -17,7 +15,6 @@
             aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <!-- Hamburger Menu Content -->
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto">
