@@ -1,0 +1,14 @@
+<%= turbo_stream.update  :messages do %>
+  <%= render "messages/messages", messages: @chat.messages.reload %>
+<% end %>
+
+<%= turbo_stream.replace "new_message_form_container"  do %>
+  <%= render "messages/form", chat: @chat, message: Message.new %>
+<% end %>
+
+<%# "new_message_form_container" %>
+<%= turbo_stream.replace "chat_title" do %>
+  <div id="chat_title" class="chat-title d-flex justify-content-center mb-3">
+  <h1><%= @chat.title %></h1>
+</div>
+<% end %>

@@ -40,27 +40,82 @@ class MessagesController < ApplicationController
     @message.role = "user"
 
     if @message.save
-      ruby_llm_chat = RubyLLM.chat
+      ruby_llm_chat = RubyLLM.chat(
+        provider: :openrouter,
+        model: "google/gemma-4-26b-a4b-it:free",
+        assume_model_exists: true
+      )
+
+
       @chat.messages.each do |message|
         ruby_llm_chat.add_message(
           role: message.role,
           content: message.content
         )
       end
+
+
+
+      if params[:edit_recipe_id].present?
+        @recipe_to_edit = Recipe.find_by(id: params[:edit_recipe_id])
+
+        if @recipe_to_edit
+          editing_context = <<~TEXT
+            The user wants to modify their existing saved recipe.
+            Here is the current database snapshot data of that recipe:
+            - Title: #{@recipe_to_edit.title}
+            - Instructions: #{@recipe_to_edit.instructions}
+            - Calories: #{@recipe_to_edit.calories}
+            - Ingredients: #{@recipe_to_edit.ingredients}
+            - Description: #{@recipe_to_edit.description}
+            - Servings: #{@recipe_to_edit.servings}
+            - Prep time: #{@recipe_to_edit.prep_time}
+            - Cook Time: #{@recipe_to_edit.cook_time}
+            - Difficulty: #{@recipe_to_edit.difficulty}
+            - rating: #{@recipe_to_edit.rating}
+
+            Update task: Tweak this specific recipe using the user's text instructions. Still output 3 distinct choice variations adhering to RecipeSchema.
+          TEXT
+
+          ruby_llm_chat.add_message(role: "system", content: editing_context)
+        end
+      end
+
+
       ruby_llm_chat.with_instructions(SYSTEM_PROMPT)
-      response = ruby_llm_chat.with_schema(RecipeSchema).ask(@message.content)
+      response = ruby_llm_chat.with_schema(RecipeSchema, force: true).ask(@message.content)
       puts response.content
 
       recipe_data = response.content
       # assistant_reply_text = recipe_data["assistant_reply"]
-      Message.create!(
+
+      #       recipe_data = {
+      #   "assistant_reply" => "Here is a mock recipe based on your prompt: #{@message.content}.",
+      #   "recipes" => [
+      #     { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
+      #     { "title" => "Mock Recipe", "instructions" => "Just a test recipe." },
+      #     { "title" => "Mock Recipe", "instructions" => "Just a test recipe." }
+      #   ]
+      # }
+
+      @ai_response = Message.create!(
         role: "assistant",
         content: recipe_data["assistant_reply"],
         recipes: recipe_data["recipes"],
         chat: @chat
       )
+
+
+
+
+
+
       @chat.generate_title_from_first_message
-      redirect_to @chat
+      respond_to do |format|
+        format.html { redirect_to @chat}
+        format.turbo_stream
+      end
+      # redirect_to @chat
     else
       render "chats/show", status: :unprocessable_entity
     end
