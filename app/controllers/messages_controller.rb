@@ -64,12 +64,12 @@ class MessagesController < ApplicationController
             The user wants to modify their existing saved recipe.
             Here is the current database snapshot data of that recipe:
             - Title: #{@recipe_to_edit.title}
-            - instructions: #{@recipe_to_edit.instructions}
-            - calories: #{@recipe_to_edit.calories}
-            - ingredients: #{@recipe_to_edit.ingredients}
+            - Instructions: #{@recipe_to_edit.instructions}
+            - Calories: #{@recipe_to_edit.calories}
+            - Ingredients: #{@recipe_to_edit.ingredients}
             - Description: #{@recipe_to_edit.description}
             - Servings: #{@recipe_to_edit.servings}
-            - prep_time: #{@recipe_to_edit.prep_time}
+            - Prep time: #{@recipe_to_edit.prep_time}
             - Cook Time: #{@recipe_to_edit.cook_time}
             - Difficulty: #{@recipe_to_edit.difficulty}
             - rating: #{@recipe_to_edit.rating}
