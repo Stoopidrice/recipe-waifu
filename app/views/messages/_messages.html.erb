@@ -1,6 +1,6 @@
   <% if @chat.messages.any? %>
   <% umami_count = 0 %>
-  <% messages.each do |message| %>
+  <% @chat.messages.each do |message| %>
     <% if message.role == "user" %>
       <div class="d-flex justify-content-end mb-2">
         <div class="user-message">
@@ -28,12 +28,12 @@
             <%= message.content %>
           </div>
           <% umami_count += 1 %>
-          <div class="container chat-page">
+          <%# <div class="container chat-page"> %>
             <div class="row g-4 justify-content-center">
               <% 3.times do |i| %>
                 <div class="col-12 col-md-6 col-lg-4">
                   <% is_editing = params[:edit_recipe_id].present? %>
-                  <% target_path = is_editing ? update_recipe_recipe_path : test_create_recipes_path %>
+                  <% target_path = is_editing ? update_recipe_recipe_path(id: params[:edit_recipe_id]) : test_create_recipes_path %>
                   <% the_HTTP_method  = is_editing ? :patch : :post %>
 
                   <% button_params = { message_id: message.id, recipe_index: i } %>
@@ -56,7 +56,7 @@
 
 
         </div>
-      </div>
+      <%# </div> %>
     <% end %>
   <% end %>
 <% else %>

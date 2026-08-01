@@ -9,21 +9,21 @@
   <% end %>
 <% end %>
 
-<%= simple_form_for [chat, message] do |f| %>
-  <%= hidden_field_tag :edit_recipe_id, params[:edit_recipe_id] if params[:edit_recipe_id].present? %>
-  <div class="chat-input-container row justify-content-center">
-    <div class="col-12 col-md-8">
-      <%= f.input :content,
-        label: " ",
-        required: true,
-        placeholder: "Ask Umami-chan something...",
-        input_html: { class: "cloud-input" }  %>
+  <%= simple_form_for [chat, message], html: { id: "new_message_form", data: { turbo_stream: true } } do |f| %>
+    <%= hidden_field_tag :edit_recipe_id, params[:edit_recipe_id] if params[:edit_recipe_id].present? %>
+    <div class="chat-input-container row justify-content-center">
+      <div class="col-12 col-md-8">
+        <%= f.input :content,
+          label: " ",
+          required: true,
+          placeholder: "Ask Umami-chan something...",
+          input_html: { class: "cloud-input", value: (message.new_record? ? "" : message.content) }  %>
+      </div>
+      <div class="col-auto d-flex align-items-center">
+        <%= image_submit_tag "cooking-pot.png",
+        class: "ask_recipe_button",
+        width: 260,
+        height: 180 %>
+      </div>
     </div>
-    <div class="col-auto d-flex align-items-center">
-      <%= image_submit_tag "cooking-pot.png",
-      class: "ask_recipe_button",
-      width: 260,
-      height: 180 %>
-    </div>
-  </div>
-<% end %>
+  <% end %>

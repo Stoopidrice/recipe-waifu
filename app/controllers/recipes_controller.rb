@@ -87,10 +87,15 @@ class RecipesController < ApplicationController
     #   rating:       hash_response["rating"],
     #   user_id:      current_user.id
     # )
-    if Recipe.exists?(title: hash_response["title"], ingredients: hash_response["ingredients"], instructions: hash_response["instructions"])
+    if Recipe.exists?(title: hash_response&.dig("title"), ingredients: hash_response&.dig("ingredients"), instructions: hash_response&.dig("instructions"))
       redirect_back fallback_location: root_path, notice: "Recipe already exists!"
     else
-    @recipe = Recipe.create!(
+
+      if hash_response.blank?
+        redirect_back fallback_location: root_path, alert: "AI Generation failed: The model returned an empty response."
+        return # Crucial: stops execution so the code below never runs
+      end
+    @recipe = Recipe.new(
       title:        hash_response["title"],
       calories:     hash_response["calories"],
       cook_time:    hash_response["cook_time"],
@@ -105,7 +110,14 @@ class RecipesController < ApplicationController
       chat_id:      chat
     )
 
-    redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
+    if @recipe.save
+  redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
+    else
+  missing_fields = @recipe.errors.full_messages.to_sentence
+  redirect_back fallback_location: root_path, alert: "AI Generation failed: #{missing_fields}"
+    end
+
+    # redirect_to recipe_path(@recipe), notice: "Test recipe created successfully!"
     end
   end
 
@@ -116,7 +128,12 @@ class RecipesController < ApplicationController
     updated_recipe_data = @message.recipes[params[:recipe_index].to_i]
     chat = @message.chat_id
 
-    if @recipe.update!(
+    if updated_recipe_data.blank?
+      redirect_back fallback_location: recipe_path(@recipe), alert: "AI Update failed: The model returned no data."
+      return
+    end
+
+    @recipe.assign_attributes(
       title:        updated_recipe_data["title"],
       calories:     updated_recipe_data["calories"],
       cook_time:    updated_recipe_data["cook_time"],
@@ -131,8 +148,15 @@ class RecipesController < ApplicationController
       chat_id:      chat
 
     )
+
+
+    if @recipe.save
+      redirect_to recipe_path(@recipe), notice: "Recipe updated successfully via AI!"
+    else
+      missing_fields = @recipe.errors.full_messages.to_sentence
+      redirect_back fallback_location: recipe_path(@recipe), alert: "AI Update failed: #{missing_fields}"
     end
-    redirect_to recipe_path(@recipe), notice: "Recipe successfully updated by AI!"
+      # redirect_to recipe_path(@recipe), notice: "Recipe successfully updated by AI!"
 
   end
 
