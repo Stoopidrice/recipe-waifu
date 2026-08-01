@@ -1,13 +1,38 @@
-<div class="chat-title d-flex justify-content-center mb-3">
+<%= turbo_stream_from @chat %>
+<div
+class="chat_page"
+data-controller="scroll"
+data-action="turbo:before-stream-render@document->scroll#messageAdded"
+>
+<div id="chat_title" class="chat-title d-flex justify-content-center mb-3">
   <h1><%= @chat.title %></h1>
 </div>
 
 <div class="container chat-page">
-  <%= render "messages/messages", messages: @chat.messages %>
-  <div class="row g-4 justify-content-center">
-
-  <div id="new_msg_container">
-    <%= render "messages/form", chat: @chat, message: @message %>
+  <div id="messages" data-scroll-target="messages">
+    <%= render "messages/messages", messages: @chat.messages %>
   </div>
+  <div class="row g-4 justify-content-center">
+    <div id="new_msg_container">
+      <div id="new_message_form_container">
+        <%= render "messages/form", chat: @chat, message: Message.new %>
+      </div>
+    </div>
   </div>
 </div>
+</div>
+
+
+<script>
+  {
+    const scrollToBottom = () => {
+      window.scrollTo(0, document.body.scrollHeight);
+    };
+
+    // Run when the page initially loads or changes via Turbo
+    document.addEventListener("turbo:load", scrollToBottom, { once: true });
+
+    // Run whenever Turbo Streams appends a new message block
+    document.addEventListener("turbo:render", scrollToBottom);
+  }
+</script>

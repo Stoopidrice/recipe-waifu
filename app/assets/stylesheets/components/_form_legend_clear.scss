@@ -28,3 +28,9 @@ legend ~ div.form-check:first-of-type {
     box-shadow: 0 5px 20px rgba(255, 150, 200, 0.4);
   }
 }
+
+.chat-input-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

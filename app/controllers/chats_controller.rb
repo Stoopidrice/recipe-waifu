@@ -2,8 +2,8 @@ class ChatsController < ApplicationController
   before_action :set_chat, only: [:show]
   DEFAULT_TITLE = "New Chat"
   def new
-    @all_chats = current_user.chats
-    @chat = Chat.new
+    @chat = Chat.create(user: current_user, title: "Untitled")
+    redirect_to chat_path(@chat)
   end
 
   def create

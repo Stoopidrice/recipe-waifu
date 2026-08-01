@@ -1,8 +1,11 @@
 // Specific CSS for your home-page
 body {
-  background: linear-gradient(rgb(107, 78, 54), rgb(139, 118, 71));
-  background-repeat: no-repeat;
-  background-attachment: fixed;
+  background-image: asset-url("background-final.png");
+  background-size: 100%;
+  background-position: center top;
+  background-repeat: repeat;
+  min-height: 100vh;
+  background-attachment: scroll;
 }
 
 .purple-underline {
@@ -18,4 +21,12 @@ body {
   font-weight: 600;
   color: rgb(131, 78, 216);
   text-shadow: 1px 1px 6px rgb(234, 188, 255);
+}
+
+
+.recommended-your-recipes-hp {
+width: 300px;
+height: auto;
+margin-left: 25rem;
+margin-top: 3rem;
 }
