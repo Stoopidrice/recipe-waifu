@@ -1,13 +1,13 @@
 .centering {
   display: flex;
   justify-content: center;
-  height: 350px;
+  min-height: 350px;
 }
 
 .recipe-container {
   align-content: center;
   width: 80%;
-  height: 100%;
+  height: auto;
   padding: 5px;
   margin: 20px 0 20px 0;
   border-radius: 10px;
